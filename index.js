@@ -1,11 +1,12 @@
-var express = require('express')
-var winston = require('winston')
+const express = require('express')
+const winston = require('winston')
 
-var staticFiles = require('./lib/static')
-var frontMatter = require('./lib/front-matter')
-var markdown = require('./lib/markdown')
-var altFormats = require('./lib/alt-formats')
-var layouts = require('./lib/layouts')
+const staticFiles = require('./lib/static')
+const frontMatter = require('./lib/front-matter')
+const markdown = require('./lib/markdown')
+const altFormats = require('./lib/alt-formats')
+const layouts = require('./lib/layouts')
+const vhosts = require('./lib/vhosts')
 
 const altcloud = function (options) {
   const app = express()
@@ -17,6 +18,7 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
+  app.use(vhosts(opts))
   app.use(staticFiles(opts))
   app.use(altFormats(opts))
   app.use(frontMatter(opts))

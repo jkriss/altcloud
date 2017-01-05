@@ -1,4 +1,4 @@
 ## Running
 
     npm install
-    node altcloud.js example/ --debug
+    node bin/altcloud.js example/ --debug

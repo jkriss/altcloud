@@ -1,5 +1,5 @@
-var argv = require('minimist')(process.argv.slice(2))
-var server = require('./index')
+const argv = require('minimist')(process.argv.slice(2))
+const server = require('../index')
 
 const opts = {
   root: argv._[0],
