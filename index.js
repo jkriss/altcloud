@@ -1,5 +1,6 @@
 const express = require('express')
 const winston = require('winston')
+const compression = require('compression')
 
 const staticFiles = require('./lib/static')
 const frontMatter = require('./lib/front-matter')
@@ -18,6 +19,7 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
+  app.use(compression())
   app.use(vhosts(opts))
   app.use(staticFiles(opts))
   app.use(altFormats(opts))
