@@ -4,6 +4,7 @@ var winston = require('winston')
 var staticFiles = require('./lib/static')
 var frontMatter = require('./lib/front-matter')
 var markdown = require('./lib/markdown')
+var altFormats = require('./lib/alt-formats')
 
 const altcloud = function (options) {
   const app = express()
@@ -15,9 +16,10 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
+  app.use(staticFiles(opts))
+  app.use(altFormats(opts))
   app.use(frontMatter(opts))
   app.use(markdown(opts))
-  app.use(staticFiles(opts))
 
   app.get('/hi', function (req, res) {
     res.send('Hello World!')
