@@ -1,0 +1,20 @@
+{
+  "name": "altcloud3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesse Kriss <jesse@jklabs.net>",
+  "dependencies": {
+    "express": "^4.14.0",
+    "front-matter": "^2.1.1",
+    "marked": "^0.3.6",
+    "minimist": "^1.2.0",
+    "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
+}
