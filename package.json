@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard && tape tests/**/*.js | faucet",
+    "standardize": "standard --fix"
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
@@ -18,6 +19,9 @@
     "winston": "^2.3.0"
   },
   "devDependencies": {
-    "standard": "^8.6.0"
+    "faucet": "0.0.1",
+    "node-mocks-http": "^1.5.5",
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
   }
 }
