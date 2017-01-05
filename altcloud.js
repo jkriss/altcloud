@@ -1,8 +1,6 @@
 var argv = require('minimist')(process.argv.slice(2))
 var server = require('./index')
 
-console.log('minimist says', argv)
-
 const opts = {
   root: argv._[0],
   port: argv.p || 3000,
@@ -12,5 +10,5 @@ const opts = {
 console.log('running with options', opts)
 
 server(opts).listen(opts.port, function () {
-  console.log(`Example app listening on port ${opts.port}!`)
+  console.log(`-- altcloud listening on port ${opts.port} --`)
 })

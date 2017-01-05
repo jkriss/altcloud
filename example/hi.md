@@ -1,8 +1,8 @@
 ---
+layout: layout.html
 title: markdown example
-description: one two one two, this is just a test
 ---
 
-# Title
+## Subtitle
 
 This is a *markdown* page
