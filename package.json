@@ -16,6 +16,8 @@
     "ip": "^1.1.4",
     "marked": "^0.3.6",
     "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "pem": "^1.9.4",
     "winston": "^2.3.0"
   },
   "devDependencies": {
