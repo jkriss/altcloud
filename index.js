@@ -21,11 +21,11 @@ const altcloud = function (options) {
   opts.logger.level = opts.logLevel
 
   // app.use(authentication())
-  app.use(authorization(opts))
   app.use(compression())
   app.use(vhosts(opts))
   app.use(staticFiles(opts))
   app.use(altFormats(opts))
+  app.use(authorization(opts))
   app.use(frontMatter(opts))
   app.use(markdown(opts))
   app.use(layouts(opts))

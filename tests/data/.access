@@ -6,3 +6,6 @@
 
 /sub2/user3secrets.txt:
   read: admin
+
+/example.md:
+  read: all

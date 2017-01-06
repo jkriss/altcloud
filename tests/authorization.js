@@ -62,10 +62,26 @@ test('prefer current dir access file', function (t) {
   })
 })
 
-// test('merge multiple files if present', function(t) {
-//
-// })
+test('load rules for actual path if it is an alt format', function (t) {
+  t.plan(4)
 
-// test('load rules for actual path if it is an alt format', function(t) {
-//
-// })
+  // rule is for /example.md, but request is for /example
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/example',
+    altcloud: {
+      actualPath: '/example.md'
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = authorization({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.error(err)
+    t.ok(req.altcloud)
+    t.ok(req.altcloud.rules)
+    t.equal(req.altcloud.rules.read, 'all')
+  })
+})
