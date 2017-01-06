@@ -3,7 +3,7 @@ const accessRules = require('../lib/access-rules')
 const httpMocks = require('node-mocks-http')
 
 test('load rules for path', function (t) {
-  t.plan(4)
+  t.plan(3)
 
   const req = httpMocks.createRequest({
     method: 'GET',
@@ -17,13 +17,12 @@ test('load rules for path', function (t) {
   handler(req, res, function (err) {
     t.error(err)
     t.ok(req.altcloud)
-    t.ok(req.altcloud.rules)
-    t.equal(req.altcloud.rules.read, 'user1')
+    t.equal(req.altcloud.rules, 'user1')
   })
 })
 
 test('load rules from parent dir if not present', function (t) {
-  t.plan(4)
+  t.plan(3)
 
   const req = httpMocks.createRequest({
     method: 'GET',
@@ -37,13 +36,12 @@ test('load rules from parent dir if not present', function (t) {
   handler(req, res, function (err) {
     t.error(err)
     t.ok(req.altcloud)
-    t.ok(req.altcloud.rules)
-    t.equal(req.altcloud.rules.read, 'user2')
+    t.equal(req.altcloud.rules, 'user2')
   })
 })
 
 test('prefer current dir access file', function (t) {
-  t.plan(4)
+  t.plan(3)
 
   const req = httpMocks.createRequest({
     method: 'GET',
@@ -57,13 +55,12 @@ test('prefer current dir access file', function (t) {
   handler(req, res, function (err) {
     t.error(err)
     t.ok(req.altcloud)
-    t.ok(req.altcloud.rules)
-    t.equal(req.altcloud.rules.read, 'user3')
+    t.equal(req.altcloud.rules, 'user3')
   })
 })
 
 test('load rules for actual path if it is an alt format', function (t) {
-  t.plan(4)
+  t.plan(3)
 
   // rule is for /example.md, but request is for /example
   const req = httpMocks.createRequest({
@@ -81,7 +78,6 @@ test('load rules for actual path if it is an alt format', function (t) {
   handler(req, res, function (err) {
     t.error(err)
     t.ok(req.altcloud)
-    t.ok(req.altcloud.rules)
-    t.equal(req.altcloud.rules.read, 'all')
+    t.equal(req.altcloud.rules, 'all')
   })
 })
