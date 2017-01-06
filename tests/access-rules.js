@@ -1,5 +1,5 @@
 const test = require('tape')
-const authorization = require('../lib/authorization')
+const accessRules = require('../lib/access-rules')
 const httpMocks = require('node-mocks-http')
 
 test('load rules for path', function (t) {
@@ -12,7 +12,7 @@ test('load rules for path', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = authorization({root: `${__dirname}/data/`})
+  const handler = accessRules({root: `${__dirname}/data/`})
 
   handler(req, res, function (err) {
     t.error(err)
@@ -32,7 +32,7 @@ test('load rules from parent dir if not present', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = authorization({root: `${__dirname}/data/`})
+  const handler = accessRules({root: `${__dirname}/data/`})
 
   handler(req, res, function (err) {
     t.error(err)
@@ -52,7 +52,7 @@ test('prefer current dir access file', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = authorization({root: `${__dirname}/data/`})
+  const handler = accessRules({root: `${__dirname}/data/`})
 
   handler(req, res, function (err) {
     t.error(err)
@@ -76,7 +76,7 @@ test('load rules for actual path if it is an alt format', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = authorization({root: `${__dirname}/data/`})
+  const handler = accessRules({root: `${__dirname}/data/`})
 
   handler(req, res, function (err) {
     t.error(err)

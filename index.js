@@ -8,7 +8,7 @@ const markdown = require('./lib/markdown')
 const altFormats = require('./lib/alt-formats')
 const layouts = require('./lib/layouts')
 const vhosts = require('./lib/vhosts')
-const authorization = require('./lib/authorization')
+const accessRules = require('./lib/access-rules')
 
 const altcloud = function (options) {
   const app = express()
@@ -25,7 +25,7 @@ const altcloud = function (options) {
   app.use(vhosts(opts))
   app.use(staticFiles(opts))
   app.use(altFormats(opts))
-  app.use(authorization(opts))
+  app.use(accessRules(opts))
   app.use(frontMatter(opts))
   app.use(markdown(opts))
   app.use(layouts(opts))
