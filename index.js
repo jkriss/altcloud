@@ -8,6 +8,7 @@ const markdown = require('./lib/markdown')
 const altFormats = require('./lib/alt-formats')
 const layouts = require('./lib/layouts')
 const vhosts = require('./lib/vhosts')
+const authorization = require('./lib/authorization')
 
 const altcloud = function (options) {
   const app = express()
@@ -19,6 +20,8 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
+  // app.use(authentication())
+  app.use(authorization(opts))
   app.use(compression())
   app.use(vhosts(opts))
   app.use(staticFiles(opts))
@@ -34,10 +37,6 @@ const altcloud = function (options) {
     } else {
       next()
     }
-  })
-
-  app.get('/hi', function (req, res) {
-    res.send('Hello World!')
   })
 
   return app

@@ -1,0 +1,8 @@
+/user1secrets.txt:
+  read: user1
+
+/sub1/user2secrets.txt:
+  read: user2
+
+/sub2/user3secrets.txt:
+  read: admin
