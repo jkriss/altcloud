@@ -1,6 +1,8 @@
 - fix subdomain directory redirect (it's not just appending /)
+- add collections/indexes back in?
 - integration tests for subdomains and access rules
 - add disallowed user name handling
 - add (optional) rejection of bad passwords (too short, on bad password list, etc)
 - allow absolute paths in layout specification
 - merge .passwords up the tree, too
+- maybe use liquid instead of handlebars for safe evaluation
