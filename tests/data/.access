@@ -9,3 +9,6 @@
 
 /example.md:
   read: all
+
+/:user/secrets.txt:
+  read: $user

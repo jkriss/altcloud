@@ -81,3 +81,23 @@ test('load rules for actual path if it is an alt format', function (t) {
     t.equal(req.altcloud.rules, 'all')
   })
 })
+
+test('substitute user variables', function (t) {
+  t.plan(3)
+
+  // rule is for /example.md, but request is for /example
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/someuser/secrets.txt'
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = accessRules({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.error(err)
+    t.ok(req.altcloud)
+    t.equal(req.altcloud.rules, 'someuser')
+  })
+})
