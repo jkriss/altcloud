@@ -9,6 +9,8 @@ const opts = {
   logLevel: argv.debug ? 'debug' : 'info'
 }
 
+if (!opts.root) delete opts.root
+
 console.log('running with options', opts)
 
 server(opts).listen(opts.port, function () {

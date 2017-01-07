@@ -1,0 +1,2 @@
+- fix auto index.html with layouts
+- add rule handling for any authenticated user

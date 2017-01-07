@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "altcloud": "bin/altcloud.js",
+    "altcloud-add-user": "bin/add-user.js",
+    "altcloud-keys": "bin/keys.js"
+  },
   "scripts": {
     "test": "standard && tape tests/**/*.js | faucet",
     "standardize": "standard --fix"
