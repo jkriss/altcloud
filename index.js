@@ -8,6 +8,7 @@ const markdown = require('./lib/markdown')
 const altFormats = require('./lib/alt-formats')
 const layouts = require('./lib/layouts')
 const vhosts = require('./lib/vhosts')
+const authenticate = require('./lib/authenticate')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
 
@@ -21,7 +22,7 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
-  // app.use(authentication())
+  app.use(authenticate(opts))
   app.use(compression())
   app.use(vhosts(opts))
   app.use(altFormats(opts))
