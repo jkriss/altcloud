@@ -2,6 +2,7 @@ const express = require('express')
 const winston = require('winston')
 const compression = require('compression')
 const cors = require('cors')
+const Path = require('path')
 
 const staticFiles = require('./lib/static')
 const frontMatter = require('./lib/front-matter')
@@ -15,6 +16,7 @@ const cookieAuth = require('./lib/cookie-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
 const loginForm = require('./lib/login-form')
+const sendRenderedFile = require('./lib/send-rendered-file')
 
 const altcloud = function (options) {
   const app = express()
@@ -24,9 +26,15 @@ const altcloud = function (options) {
     logger: winston
   }, options)
 
+  opts.root = Path.resolve(opts.root)
   opts.logger.level = opts.logLevel
 
   const cookies = cookieAuth(opts)
+
+  app.use(function (req, res, next) {
+    opts.logger.info(req.method, req.path)
+    next()
+  })
 
   app.use('/', loginForm(opts))
 
@@ -39,19 +47,11 @@ const altcloud = function (options) {
   app.use(altFormats(opts))
   app.use(accessRules(opts))
   app.use(accessEnforcement(opts))
-  app.use(staticFiles(opts))
   app.use(frontMatter(opts))
   app.use(markdown(opts))
   app.use(layouts(opts))
-
-  // send file contents if set
-  app.use(function (req, res, next) {
-    if (req.altcloud && req.altcloud.fileContents) {
-      res.send(req.altcloud.fileContents)
-    } else {
-      next()
-    }
-  })
+  app.use(sendRenderedFile(opts))
+  app.use(staticFiles(opts))
 
   return app
 }

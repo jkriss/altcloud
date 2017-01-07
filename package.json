@@ -9,7 +9,7 @@
     "altcloud-keys": "bin/keys.js"
   },
   "scripts": {
-    "test": "standard && tape tests/**/*.js | faucet",
+    "test": "standard && tape tests/**/**/*.js | faucet",
     "standardize": "standard --fix"
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
@@ -38,6 +38,7 @@
     "faucet": "0.0.1",
     "node-mocks-http": "^1.5.5",
     "standard": "^8.6.0",
+    "supertest": "^2.0.1",
     "tape": "^4.6.3"
   }
 }
