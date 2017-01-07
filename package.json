@@ -12,6 +12,7 @@
     "basic-auth": "^1.1.0",
     "bcryptjs": "^2.4.0",
     "compression": "^1.6.2",
+    "cors": "^2.8.1",
     "express": "^4.14.0",
     "front-matter": "^2.1.1",
     "handlebars": "^4.0.6",

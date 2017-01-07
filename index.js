@@ -1,6 +1,7 @@
 const express = require('express')
 const winston = require('winston')
 const compression = require('compression')
+const cors = require('cors')
 
 const staticFiles = require('./lib/static')
 const frontMatter = require('./lib/front-matter')
@@ -22,6 +23,7 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
+  app.use(cors())
   app.use(authenticate(opts))
   app.use(compression())
   app.use(vhosts(opts))
