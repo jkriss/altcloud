@@ -9,6 +9,7 @@
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
+    "bcryptjs": "^2.4.0",
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "front-matter": "^2.1.1",
