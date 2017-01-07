@@ -1,2 +1,8 @@
 user3secrets.txt:
   read: user3
+
+:user/test.txt:
+  read: $user
+
+:user/index.html:
+  read: $user

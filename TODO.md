@@ -1,1 +1,2 @@
+- integration tests for subdomains and access rules
 - add rule handling for any authenticated user
