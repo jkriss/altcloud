@@ -58,10 +58,53 @@ test("let authed users view a restricted resource if they're on the list", funct
 
   const handler = accessEnforcement({root: `${__dirname}/data/`})
 
-  // don't leak info–return 404 if not authorized
   handler(req, res, function (err) {
     t.error(err)
     t.equals(res.statusCode, 200)
+  })
+})
+
+test("let authed users view a restricted resource if there's an 'authenticated' rule", function (t) {
+  t.plan(2)
+
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/loggedin',
+    user: 'user1',
+    altcloud: {
+      rules: 'authenticated'
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = accessEnforcement({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.error(err)
+    t.equals(res.statusCode, 200)
+  })
+})
+
+test("don't let unauthed users view a restricted resource if they're not on the list, even if 'authenticated' is", function (t) {
+  t.plan(2)
+
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/loggedin',
+    altcloud: {
+      rules: 'authenticated'
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = accessEnforcement({root: `${__dirname}/data/`})
+
+  // don't leak info–return 404 if not authorized
+  handler(req, res, function (err) {
+    t.ok(err, 'should throw an error')
+    t.equals(err && err.status, 404)
   })
 })
 

@@ -1,2 +1,3 @@
 - integration tests for subdomains and access rules
-- add rule handling for any authenticated user
+- add disallowed user name handling
+- add (optional) rejection of bad passwords (too short, on bad password list, etc.)
