@@ -9,7 +9,8 @@ const markdown = require('./lib/markdown')
 const altFormats = require('./lib/alt-formats')
 const layouts = require('./lib/layouts')
 const vhosts = require('./lib/vhosts')
-const authenticate = require('./lib/authenticate')
+const basicAuth = require('./lib/basic-auth')
+const cookieAuth = require('./lib/cookie-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
 
@@ -23,8 +24,11 @@ const altcloud = function (options) {
 
   opts.logger.level = opts.logLevel
 
+  const cookies = cookieAuth(opts)
+
   app.use(cors())
-  app.use(authenticate(opts))
+  app.use(basicAuth(opts))
+  app.use(cookies.cookieParser)
   app.use(compression())
   app.use(vhosts(opts))
   app.use(altFormats(opts))

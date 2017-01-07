@@ -1,5 +1,5 @@
 const test = require('tape')
-const authenicate = require('../lib/authenticate')
+const basicAuth = require('../lib/basic-auth')
 const httpMocks = require('node-mocks-http')
 
 test('set user if credentials are valid', function (t) {
@@ -15,7 +15,7 @@ test('set user if credentials are valid', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = authenicate({root: `${__dirname}/data/`})
+  const handler = basicAuth({root: `${__dirname}/data/`})
 
   handler(req, res, function (err) {
     t.error(err)
@@ -33,7 +33,7 @@ test("don't set user if credentials aren't valid", function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = authenicate({root: `${__dirname}/data/`})
+  const handler = basicAuth({root: `${__dirname}/data/`})
 
   handler(req, res, function (err) {
     t.error(err)
