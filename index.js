@@ -13,6 +13,7 @@ const basicAuth = require('./lib/basic-auth')
 const cookieAuth = require('./lib/cookie-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
+const loginForm = require('./lib/login-form')
 
 const altcloud = function (options) {
   const app = express()
@@ -25,6 +26,8 @@ const altcloud = function (options) {
   opts.logger.level = opts.logLevel
 
   const cookies = cookieAuth(opts)
+
+  app.use('/_', loginForm(opts))
 
   app.use(cors())
   app.use(basicAuth(opts))
