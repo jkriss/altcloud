@@ -17,7 +17,7 @@ test('set user if cookie is valid', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = cookies.cookieParser
+  const handler = cookies.checkCookie
 
   handler(req, res, function (err) {
     t.error(err)

@@ -10,6 +10,7 @@ const altFormats = require('./lib/alt-formats')
 const layouts = require('./lib/layouts')
 const vhosts = require('./lib/vhosts')
 const basicAuth = require('./lib/basic-auth')
+const cookieParser = require('cookie-parser')
 const cookieAuth = require('./lib/cookie-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
@@ -27,11 +28,12 @@ const altcloud = function (options) {
 
   const cookies = cookieAuth(opts)
 
-  app.use('/_', loginForm(opts))
+  app.use('/', loginForm(opts))
 
   app.use(cors())
   app.use(basicAuth(opts))
-  app.use(cookies.cookieParser)
+  app.use(cookieParser())
+  app.use(cookies.checkCookie)
   app.use(compression())
   app.use(vhosts(opts))
   app.use(altFormats(opts))
