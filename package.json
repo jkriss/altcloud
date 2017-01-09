@@ -35,6 +35,7 @@
     "winston": "^2.3.0"
   },
   "devDependencies": {
+    "del": "^2.2.2",
     "faucet": "0.0.1",
     "node-mocks-http": "^1.5.5",
     "standard": "^8.6.0",
