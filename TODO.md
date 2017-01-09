@@ -5,3 +5,4 @@
 - add (optional) rejection of bad passwords (too short, on bad password list, etc)
 - allow absolute paths in layout specification
 - merge .passwords up the tree, too
+- fix unhandled promise rejection on bad liquid template code
