@@ -33,7 +33,7 @@ const altcloud = function (options) {
   const cookies = cookieAuth(opts)
 
   app.use(function (req, res, next) {
-    opts.logger.info(req.method, req.path)
+    opts.logger.info(req.method, req.url)
     next()
   })
 
