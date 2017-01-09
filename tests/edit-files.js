@@ -27,6 +27,28 @@ test('post file', function (t) {
     })
 })
 
+test('put file', function (t) {
+  t.plan(4)
+
+  del.sync([`${__dirname}/data/rw`])
+
+  // file shouldn't exist yet
+  t.throws(function () {
+    fs.statSync(`${__dirname}/data/rw/test.txt`)
+  })
+
+  request(editFiles({root: `${__dirname}/data`}))
+    .put('/rw/test.txt')
+    .type('text')
+    .send('oh hi')
+    .end(function (err, res) {
+      t.error(err)
+      t.equals(res.statusCode, 201)
+      const content = fs.readFileSync(`${__dirname}/data/rw/test.txt`, 'utf8')
+      t.equals(content, 'oh hi')
+    })
+})
+
 test('delete file', function (t) {
   t.plan(3)
   mkdirp.sync(`${__dirname}/data/rw`)
