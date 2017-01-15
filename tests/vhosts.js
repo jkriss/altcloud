@@ -122,3 +122,22 @@ test("send 404 immediately if the hostname isn't found", function(t) {
   })
 
 })
+
+test("don't worry about specific files existing, just the dir", function (t) {
+  t.plan(2)
+
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/index',
+    hostname: 'subdomain1.example.com'
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = vhosts({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.error(err)
+    t.equal(req.url, '/subdomain1/index')
+  })
+})
