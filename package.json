@@ -6,6 +6,7 @@
   "bin": {
     "altcloud": "bin/altcloud.js",
     "altcloud-add-user": "bin/add-user.js",
+    "altcloud-add-token": "bin/add-token.js",
     "altcloud-keys": "bin/keys.js"
   },
   "scripts": {
