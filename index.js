@@ -17,7 +17,6 @@ const tokenAuth = require('./lib/token-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
 const loginForm = require('./lib/login-form')
-const userInfo = require('./lib/user-info')
 const sendRenderedFile = require('./lib/send-rendered-file')
 const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
@@ -41,7 +40,6 @@ const altcloud = function (options) {
   })
 
   app.use('/', loginForm(opts))
-  app.use('/_/', userInfo(opts))
 
   app.use(cors())
   app.use(basicAuth(opts))
