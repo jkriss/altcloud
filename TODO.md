@@ -1,7 +1,9 @@
 - add collections/indexes back in?
+- make sure etags/not modified works with non-files (e.g. collections)
 - integration tests for subdomains and access rules
 - add disallowed user name handling (can't start with ., no "all", "authorized")
 - add (optional) rejection of bad passwords (too short, on bad password list, etc)
 - allow absolute paths in layout specification
 - merge .passwords up the tree, too
 - fix unhandled promise rejection on bad liquid template code
+- automatic collection json should test each individual path against the access rules
