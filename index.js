@@ -59,7 +59,26 @@ const altcloud = function (options) {
   app.use(staticFiles(opts))
   app.use(collections(opts))
 
-  return app
+  const server = require('http').Server(app)
+  const io = require('socket.io')(server)
+
+  io.use(function(socket, next){
+    opts.logger.debug("socket handshake:", socket.handshake)
+    opts.logger.debug("socket request keys:", Object.keys(socket.request))
+    opts.logger.debug("socket request cookie:", socket.request.headers.cookie)
+    if (socket.request.headers.cookie) return next();
+    next(new Error('Authentication error'));
+  })
+
+  io.on('connection', function (socket) {
+    opts.logger.debug("-- socket.io connection --")
+    socket.emit('news', { hello: 'world' })
+    socket.on('my other event', function (data) {
+      console.log(data)
+    })
+  })
+
+  return server
 }
 
 module.exports = altcloud
