@@ -20,6 +20,7 @@ const loginForm = require('./lib/login-form')
 const sendRenderedFile = require('./lib/send-rendered-file')
 const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
+const sse = require('./lib/sse')
 
 const altcloud = function (options) {
   const app = express()
@@ -54,6 +55,7 @@ const altcloud = function (options) {
   app.use(frontMatter(opts))
   app.use(markdown(opts))
   app.use(layouts(opts))
+  app.use(sse(opts))
   app.use(sendRenderedFile(opts))
   app.use(editFiles(opts))
   app.use(staticFiles(opts))
