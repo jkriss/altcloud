@@ -1,4 +1,5 @@
-- add collections/indexes back in?
+- check auth rules for sse-subscribed routes
+- clean up old sse subscriptions
 - make sure etags/not modified works with non-files (e.g. collections)
 - integration tests for subdomains and access rules
 - add disallowed user name handling (can't start with ., no "all", "authorized")
