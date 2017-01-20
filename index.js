@@ -1,7 +1,6 @@
 const express = require('express')
 const winston = require('winston')
 const compression = require('compression')
-const cors = require('cors')
 const Path = require('path')
 
 const staticFiles = require('./lib/static')
