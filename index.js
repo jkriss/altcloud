@@ -40,7 +40,6 @@ const altcloud = function (options) {
 
   app.use('/', loginForm(opts))
 
-  app.use(cors())
   app.use(basicAuth(opts))
   app.use(cookieParser())
   app.use(cookies.checkCookie)
