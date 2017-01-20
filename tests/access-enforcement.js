@@ -149,7 +149,6 @@ test("don't let people view .access if there's no rule for it", function (t) {
     t.ok(err)
     t.equals(err.status, 404)
   })
-
 })
 
 test("don't let people view .tokens if there's no rule for it", function (t) {
@@ -170,7 +169,6 @@ test("don't let people view .tokens if there's no rule for it", function (t) {
     t.ok(err)
     t.equals(err.status, 404)
   })
-
 })
 
 test("don't let people view .keys/private.key if there's no rule for it", function (t) {
@@ -191,7 +189,6 @@ test("don't let people view .keys/private.key if there's no rule for it", functi
     t.ok(err)
     t.equals(err.status, 404)
   })
-
 })
 
 test("don't let people view .keys/private.key EVER", function (t) {
@@ -215,7 +212,6 @@ test("don't let people view .keys/private.key EVER", function (t) {
     t.ok(err)
     t.equals(err.status, 404)
   })
-
 })
 
 test("let people view .keys/public.pem if it's explicitly allowed", function (t) {
@@ -238,5 +234,4 @@ test("let people view .keys/public.pem if it's explicitly allowed", function (t)
     t.error(err)
     t.equals(res.statusCode, 200)
   })
-
 })

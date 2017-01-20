@@ -1,3 +1,4 @@
+- fix tests
 - get let's encrypt working
 - integration tests for subdomains and access rules
 - set up properly for npm (including license)
