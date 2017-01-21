@@ -1,8 +1,6 @@
 - fix tests
 - get let's encrypt working
 - integration tests for subdomains and access rules
-- set up properly for npm (including license)
-
 - make sure etags/not modified works with non-files (e.g. collections)
 - add disallowed user name handling (can't start with ., no "all", "authorized")
 - add (optional?) rejection of bad passwords (too short, on bad password list, etc)
