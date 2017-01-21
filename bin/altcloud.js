@@ -32,12 +32,23 @@ if (opts.ssl && !config.letsencrypt) {
   process.exit(1)
 }
 
+// auto approve domains
+function approveDomains (opts, certs, cb) {
+  if (certs) {
+    opts.domains = certs.altnames
+  } else {
+    opts.email = config.letsencrypt.email
+    opts.agreeTos = true
+  }
+  cb(null, { options: opts, certs: certs })
+}
+
 if (opts.ssl && config && config.letsencrypt) {
   require('letsencrypt-express').create({
     server: config.letsencrypt.server || 'https://acme-v01.api.letsencrypt.org/directory',
     email: config.letsencrypt.email,
-    agreeTos: config.letsencrypt.agreeTos || true,
-    approveDomains: config.letsencrypt.approveDomains,
+    agreeTos: true,
+    approveDomains: approveDomains,
 
     app: server(opts)
 

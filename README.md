@@ -287,7 +287,6 @@ You'll want a `.config` file in your root directory that looks something like th
 
     letsencrypt:
       email: youremail@example.com
-      approveDomains: [yourdomain.tld, subdomain.yourdomain.tld]
 
 ## Running
 
