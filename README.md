@@ -283,6 +283,12 @@ You'll always want to use SSL in production, since the session cookies (and toke
 
 Happily, the amazing [Let's Encrypt](https://letsencrypt.org/) project means we can get SSL certificates for free, and automatically.
 
+You'll want a `.config` file in your root directory that looks something like this:
+
+    letsencrypt:
+      email: youremail@example.com
+      approveDomains: [yourdomain.tld, subdomain.yourdomain.tld]
+
 ## Running
 
     npm install -g altcloud
@@ -292,4 +298,16 @@ You can also specify the port, e.g. `altcloud -p 8888`, or use the debug flag to
 
 ## Installing on Digital Ocean
 
-Coming soon...
+Starting from Ubuntu 16.04:
+
+    # install node
+    curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+    sudo apt-get install -y nodejs build-essential
+
+    # create a user for altcloud
+    adduser --disabled-password --gecos ""  altcloud
+
+    # let node run on low numbered ports (like 80, 443)
+    setcap cap_net_bind_service=+ep `readlink -f \`which node\``
+
+    npm i -g altcloud

@@ -34,9 +34,9 @@ if (opts.ssl && !config.letsencrypt) {
 
 if (opts.ssl && config && config.letsencrypt) {
   require('letsencrypt-express').create({
-    server: config.letsencrypt.server,
+    server: config.letsencrypt.server || 'https://acme-v01.api.letsencrypt.org/directory',
     email: config.letsencrypt.email,
-    agreeTos: config.letsencrypt.agreeTos,
+    agreeTos: config.letsencrypt.agreeTos || true,
     approveDomains: config.letsencrypt.approveDomains,
 
     app: server(opts)
