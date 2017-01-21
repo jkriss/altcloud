@@ -1,4 +1,3 @@
-- get let's encrypt working
 - integration tests for subdomains and access rules
 - make sure etags/not modified works with non-files (e.g. collections)
 - add disallowed user name handling (can't start with ., no "all", "authorized")
