@@ -309,4 +309,22 @@ Starting from Ubuntu 16.04:
     # let node run on low numbered ports (like 80, 443)
     setcap cap_net_bind_service=+ep `readlink -f \`which node\``
 
+    # install altcloud
     npm i -g altcloud
+
+Then you'll want to set it up as a service. Copy `config/altcloud.server` to `/etc/systemd/system/altcloud.service`.
+
+    # create a webroot directory as the altcloud user
+    su altcloud
+    cd ~
+    mkdir webroot
+
+    # create the keys
+    altcloud-keys
+
+    # switch back to root and enable the service
+    exit
+    systemctl enable altcloud
+    systemctl start altcloud
+
+
