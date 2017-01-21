@@ -27,6 +27,7 @@ Currently, altcloud supports:
 - path-based access rules
 - PUT and DELETE operations (when authorized)
 - JSON collections
+- automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
 
 Coming soon:
 - Automatic SSL via Let's Encrypt
