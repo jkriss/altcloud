@@ -21,6 +21,25 @@ test('load rules for path', function (t) {
   })
 })
 
+test('parse multiple users', function (t) {
+  t.plan(3)
+
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/another-secret.txt'
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = accessRules({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.error(err)
+    t.ok(req.altcloud)
+    t.deepEqual(req.altcloud.rules, ['user1', 'user2'])
+  })
+})
+
 test('load rules from parent dir if not present', function (t) {
   t.plan(3)
 

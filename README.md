@@ -217,11 +217,11 @@ Any directory in your altcloud server path can contain a `.access` file. It's a 
 
 Here's an example:
 
-    /secret.txt
+    /secret.txt:
       read: user1
 
     /another-secret.txt:
-      read: user1, user2
+      read: [user1, user2]
 
 This, as you'd expect, means that only user1 can view `/secret.txt`, but both user1 and user2 can read `/another-secret.txt`.
 
