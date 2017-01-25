@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-var passwordHasher = require('../lib/password-hasher')
+const passwordHasher = require('../lib/password-hasher')
 
 if (process.argv.length < 4) {
   console.error('Usage: add-user <username> <password>')
