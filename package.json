@@ -1,8 +1,13 @@
 {
   "name": "altcloud",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.6",
+  "description": "A web server with extra powers. Run your own stuff.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkriss/altcloud.git"
+  },
+  "license": "MIT",
   "bin": {
     "altcloud": "bin/altcloud.js",
     "altcloud-add-user": "bin/add-user.js",
@@ -29,6 +34,7 @@
     "ip": "^1.1.4",
     "js-yaml": "^3.7.0",
     "jsonwebtoken": "^7.2.1",
+    "letsencrypt-express": "^2.0.6",
     "liquid-node": "^2.6.1",
     "marked": "^0.3.6",
     "minimist": "^1.2.0",

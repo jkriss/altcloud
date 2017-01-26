@@ -64,6 +64,28 @@ test("let authed users view a restricted resource if they're on the list", funct
   })
 })
 
+test("let authed users view a restricted resource if they're on a list with multiple users", function (t) {
+  t.plan(2)
+
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/another-secret.txt',
+    user: 'user1',
+    altcloud: {
+      rules: ['user1', 'user2']
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = accessEnforcement({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.error(err)
+    t.equals(res.statusCode, 200)
+  })
+})
+
 test("let authed users view a restricted resource if there's an 'authenticated' rule", function (t) {
   t.plan(2)
 

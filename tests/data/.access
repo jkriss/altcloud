@@ -12,3 +12,9 @@
 
 /:user/secrets.txt:
   read: $user
+
+/secret.txt:
+  read: user1
+
+/another-secret.txt:
+  read: [user1, user2]
