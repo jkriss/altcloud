@@ -124,8 +124,101 @@ test("don't allow signup without a token", function (t) {
   })
 })
 
-// test("don't allow bad passwords", function (t) {
-// })
+test("don't allow bad passwords", function (t) {
+  t.plan(3)
+
+  const invitationCode = `some-invitation-code:
+  expires: ${new Date().getTime() + (1000 * 60 * 60 * 24 * 2)}
+  `
+
+  fs.writeFileSync(invitationsPath, invitationCode)
+
+  const req = httpMocks.createRequest({
+    method: 'POST',
+    url: '/signup',
+    body: {
+      token: 'some-invitation-code',
+      username: 'newuser',
+      password: 'passw0rd'
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = signup({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.ok(err)
+    t.notOk(req.user)
+
+    const invitations = loadInvitations()
+    t.true(invitations['some-invitation-code'], 'invitation should still be valid')
+  })
+})
+
+test("don't allow passwords that are too short", function (t) {
+  t.plan(3)
+
+  const invitationCode = `some-invitation-code:
+  expires: ${new Date().getTime() + (1000 * 60 * 60 * 24 * 2)}
+  `
+
+  fs.writeFileSync(invitationsPath, invitationCode)
+
+  const req = httpMocks.createRequest({
+    method: 'POST',
+    url: '/signup',
+    body: {
+      token: 'some-invitation-code',
+      username: 'another-newuser',
+      password: 'no'
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = signup({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.ok(err)
+    t.notOk(req.user)
+
+    const invitations = loadInvitations()
+    t.true(invitations['some-invitation-code'], 'invitation should still be valid')
+  })
+})
+
+test("don't allow passwords that include the username", function (t) {
+  t.plan(3)
+
+  const invitationCode = `some-invitation-code:
+  expires: ${new Date().getTime() + (1000 * 60 * 60 * 24 * 2)}
+  `
+
+  fs.writeFileSync(invitationsPath, invitationCode)
+
+  const req = httpMocks.createRequest({
+    method: 'POST',
+    url: '/signup',
+    body: {
+      token: 'some-invitation-code',
+      username: 'newuser-bad-pw',
+      password: 'newuser-bad-pw-45'
+    }
+  })
+
+  const res = httpMocks.createResponse()
+
+  const handler = signup({root: `${__dirname}/data/`})
+
+  handler(req, res, function (err) {
+    t.ok(err)
+    t.notOk(req.user)
+
+    const invitations = loadInvitations()
+    t.true(invitations['some-invitation-code'], 'invitation should still be valid')
+  })
+})
 
 test("don't allow missing password", function (t) {
   t.plan(3)

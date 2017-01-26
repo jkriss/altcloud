@@ -19,6 +19,7 @@
     "basic-auth": "^1.1.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
+    "common-password": "^0.1.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
