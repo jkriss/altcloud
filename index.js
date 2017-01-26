@@ -19,6 +19,7 @@ const loginForm = require('./lib/login-form')
 const sendRenderedFile = require('./lib/send-rendered-file')
 const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
+const signup = require('./lib/signup')
 
 const altcloud = function (options) {
   const app = express()
@@ -39,6 +40,7 @@ const altcloud = function (options) {
   })
 
   app.use('/', loginForm(opts))
+  app.use('/', signup(opts))
 
   app.use(basicAuth(opts))
   app.use(cookieParser())
