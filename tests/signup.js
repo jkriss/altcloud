@@ -42,6 +42,7 @@ test('allow new user registration with invitation token', function (t) {
 
     const invitations = loadInvitations()
     t.false(invitations['some-invitation-code'], 'invitation should no longer be valid')
+    passwords.remove(`${__dirname}/data/.passwords`, 'newuser')
   })
 })
 
