@@ -59,6 +59,16 @@ const altcloud = function (options) {
   app.use(staticFiles(opts))
   app.use(collections(opts))
 
+  // error handler
+  app.use(function (err, req, res, next) {
+    if (err && req.headers['content-type'] === 'application/json' && err.status) {
+      res.status(err.status)
+      res.json({ message: err.message })
+    } else {
+      next()
+    }
+  })
+
   return app
 }
 
