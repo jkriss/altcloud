@@ -21,6 +21,7 @@ const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
 const signup = require('./lib/signup')
 const cron = require('./lib/cron')
+const headers = require('./lib/headers')
 
 const altcloud = function (options) {
   const app = express()
@@ -54,6 +55,7 @@ const altcloud = function (options) {
   app.use(altFormats(opts))
   app.use(accessRules(opts))
   app.use(accessEnforcement(opts))
+  app.use(headers(opts))
   app.use(frontMatter(opts))
   app.use(markdown(opts))
   app.use(layouts(opts))
