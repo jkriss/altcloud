@@ -20,6 +20,7 @@ const sendRenderedFile = require('./lib/send-rendered-file')
 const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
 const signup = require('./lib/signup')
+const cron = require('./lib/cron')
 
 const altcloud = function (options) {
   const app = express()
@@ -31,6 +32,8 @@ const altcloud = function (options) {
 
   opts.root = Path.resolve(opts.root)
   opts.logger.level = opts.logLevel
+
+  cron(opts)
 
   const cookies = cookieAuth(opts)
 
