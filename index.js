@@ -22,6 +22,7 @@ const collections = require('./lib/collections')
 const signup = require('./lib/signup')
 const cron = require('./lib/cron')
 const headers = require('./lib/headers')
+const helmet = require('helmet')
 
 const altcloud = function (options) {
   const app = express()
@@ -46,6 +47,7 @@ const altcloud = function (options) {
   app.use('/', loginForm(opts))
   app.use('/', signup(opts))
 
+  app.use(helmet())
   app.use(basicAuth(opts))
   app.use(cookieParser())
   app.use(cookies.checkCookie)
