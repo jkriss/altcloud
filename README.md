@@ -29,9 +29,6 @@ Currently, altcloud supports:
 - JSON collections
 - automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
 
-Coming soon:
-- Automatic SSL via Let's Encrypt
-
 ## Setup
 
     npm install -g altcloud
