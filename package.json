@@ -53,5 +53,8 @@
     "standard": "^8.6.0",
     "supertest": "^2.0.1",
     "tape": "^4.6.3"
+  },
+  "pkg": {
+    "assets": "node_modules/localhost.daplie.com-certificates/*.pem"
   }
 }
