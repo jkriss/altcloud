@@ -73,7 +73,6 @@ Here's an example. If you have this file saved as `layout.html`:
       <head>
         <meta charset="utf-8">
         <title>{{ title }}</title>
-        </style>
       </head>
       <body>
 
