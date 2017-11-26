@@ -38,8 +38,8 @@ Coming soon:
 
 Then create (or go to) the root directory for your server. You'll want to generate keys for token signing and create a user.
 
-    altcloud-keys
-    altcloud-add-user your-username your-password >> .passwords
+    altcloud keys
+    altcloud add-user your-username your-password
 
 That will create a public and private key under `.keys` and add a username and hashed password to `.passwords`.
 
@@ -160,9 +160,9 @@ Usernames and passwords are stored in a `.passwords` file in the root directory,
 
 This is a YAML file where each entry is `username: hashedPassword`. We use bcrypt for password hashing.
 
-The easiest way to add a user is with the `altcloud-add-user` command:
+The easiest way to add a user is with the `altcloud add-user` command:
 
-    altcloud-add-user some-username some-password >> .passwords
+    altcloud add-user some-username some-password
 
 Please make a note of the password you provide via the command line, since it cannot be extracted from the hashed version stored in the `.passwords` file.
 
@@ -200,9 +200,9 @@ To make life easier, altcloud also sets a cookie with JSON-formatted user inform
 
 Sometimes it's handy to be able to authenticate with a single token, provided as a querystring parameter. (This is especially useful for webhooks.)
 
-You can generate a token for this purpose by running the `altcloud-add-token` command:
+You can generate a token for this purpose by running the `altcloud add-token` command:
 
-    altcloud-add-token some-username >> .tokens
+    altcloud add-token some-username
 
 This will add a line to the YAML-formatted `.tokens` file of the form `token: username`.
 
@@ -327,5 +327,3 @@ Then you'll want to set it up as a service. Copy `config/altcloud.server` to `/e
     exit
     systemctl enable altcloud
     systemctl start altcloud
-
-

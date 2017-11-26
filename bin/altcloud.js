@@ -1,62 +1,52 @@
 #! /usr/bin/env node
-
 const argv = require('minimist')(process.argv.slice(2))
+const path = require('path')
 const fs = require('fs')
-const Path = require('path')
-const yaml = require('js-yaml')
-const server = require('../index')
 
-const opts = {
-  root: argv._[0] || './',
-  port: argv.p || 3000,
-  logLevel: argv.debug ? 'debug' : 'info',
-  ssl: argv.ssl ? true : process.env.NODE_ENV === 'production'
+const server = require('../lib/cli/server')
+const keys = require('../lib/cli/keys')
+const addUser = require('../lib/cli/add-user')
+const addToken = require('../lib/cli/add-token')
+const addInvitation = require('../lib/cli/add-invitation')
+
+const append = function(file, line) {
+  const root = argv.root || './'
+  const outputFile = path.join(root, file)
+  console.log("Appending to", outputFile)
+  fs.appendFileSync(outputFile, `${line}\n`)
 }
 
-if (!opts.root) delete opts.root
+// console.error(argv)
 
-console.log('running with options', opts)
+const command = argv._[0] || 'server'
 
-let config
-try {
-  config = yaml.safeLoad(fs.readFileSync(Path.join(opts.root, '.config'), 'utf8'))
-} catch (e) {}
-
-if (opts.ssl && !config) {
-  console.log('SSL should be on, but no .config file present')
-  process.exit(1)
-}
-
-if (opts.ssl && !config.letsencrypt) {
-  console.log('SSL should be on, but no letsencrypt settings in .config')
-  process.exit(1)
-}
-
-// auto approve domains
-function approveDomains (opts, certs, cb) {
-  if (certs) {
-    opts.domains = certs.altnames
-  } else {
-    opts.email = config.letsencrypt.email
-    opts.agreeTos = true
+if (command === 'server') {
+  const opts = {
+    root: argv._[0] || './',
+    port: argv.p || 3000,
+    logLevel: argv.debug ? 'debug' : 'info',
+    ssl: argv.ssl ? true : process.env.NODE_ENV === 'production'
   }
-  cb(null, { options: opts, certs: certs })
-}
-
-if (opts.ssl && config && config.letsencrypt) {
-  require('letsencrypt-express').create({
-    server: config.letsencrypt.server || 'https://acme-v01.api.letsencrypt.org/directory',
-    email: config.letsencrypt.email,
-    agreeTos: true,
-    approveDomains: approveDomains,
-
-    app: server(opts)
-
-  }).listen(80, 443)
-  console.log('-- altcloud running with ssl on ports 80 and 443 --')
+  server(opts)
+} else if (command === 'add-user') {
+  if (argv._.length === 1 || argv._.length >= 4) {
+    console.error('Usage: add-user <username> <password>')
+  } else {
+    const newLine = addUser(argv._[1], argv._[2])
+    append('.passwords', newLine)
+  }
+} else if (command === 'add-token') {
+  const newLine = addToken(argv._[1])
+  append('.tokens', newLine)
+} else if (command === 'add-invitation') {
+  const newLine = addInvitation(argv._[1])
+  append('.tokens', newLine)
+} else if (command === 'keys') {
+  const root = argv._[1] || './'
+  keys(root)
+} else if (argv._.length >= 2) {
+  console.error("Too many arguments")
+  process.exit(1)
 } else {
-  server(opts).listen(opts.port, function () {
-    console.log(`-- altcloud listening on port ${opts.port} --`)
-  })
+  console.log("Usage: altcloud [add-user]")
 }
-
