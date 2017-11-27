@@ -22,7 +22,7 @@ const command = argv._[0] || 'server'
 
 if (command === 'server') {
   const opts = {
-    root: argv._[0] || './',
+    root: argv._[1] || process.cwd(),
     port: argv.p || 3000,
     logLevel: argv.debug ? 'debug' : 'info',
     ssl: argv.ssl ? true : process.env.NODE_ENV === 'production'
