@@ -10,7 +10,7 @@ const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
 
 const append = function(file, line) {
-  const root = argv.root || './'
+  const root = argv.root || process.cwd()
   const outputFile = path.join(root, file)
   console.log("Appending to", outputFile)
   fs.appendFileSync(outputFile, `${line}\n`)

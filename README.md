@@ -29,9 +29,6 @@ Currently, altcloud supports:
 - JSON collections
 - automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
 
-Coming soon:
-- Automatic SSL via Let's Encrypt
-
 ## Setup
 
     npm install -g altcloud
@@ -76,7 +73,6 @@ Here's an example. If you have this file saved as `layout.html`:
       <head>
         <meta charset="utf-8">
         <title>{{ title }}</title>
-        </style>
       </head>
       <body>
 
