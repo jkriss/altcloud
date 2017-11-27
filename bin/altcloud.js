@@ -7,7 +7,7 @@ const yaml = require('js-yaml')
 const server = require('../index')
 
 const opts = {
-  root: argv._[0] || './',
+  root: argv._[0] || process.cwd(),
   port: argv.p || 3000,
   logLevel: argv.debug ? 'debug' : 'info',
   ssl: argv.ssl ? true : process.env.NODE_ENV === 'production'
@@ -59,4 +59,3 @@ if (opts.ssl && config && config.letsencrypt) {
     console.log(`-- altcloud listening on port ${opts.port} --`)
   })
 }
-
