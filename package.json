@@ -17,7 +17,9 @@
   },
   "scripts": {
     "test": "standard && tape tests/**/**/*.js | faucet",
-    "standardize": "standard --fix"
+    "standardize": "standard --fix",
+    "build": "pkg package.json",
+    "upload": "scp altcloud-linux altcloud@tinyserver.club:~/webroot/altcloud.io/linux-x64/altcloud && scp altcloud-macos altcloud@tinyserver.club:~/webroot/altcloud.io/macos/altcloud && scp altcloud-win.exe altcloud@tinyserver.club:~/webroot/altcloud.io/win/altcloud.exe"
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
@@ -50,6 +52,7 @@
     "del": "^2.2.2",
     "faucet": "0.0.1",
     "node-mocks-http": "^1.5.5",
+    "pkg": "^4.3.0-beta.1",
     "standard": "^8.6.0",
     "supertest": "^2.0.1",
     "tape": "^4.6.3"
