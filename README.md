@@ -272,9 +272,16 @@ That is, if `messages/user1.json` contains `[{ "content" : "hi!" }]` and `messag
       "messages/user2.json": [{ "content" : "hey!" }]
     }
 
-### Automatic SSL via Let's Encrypt
+### Path rewriting
 
-**Coming soon**
+If you want a single page to handle a whole set of urls, you can set a rewrite rule for a path. In your access file, you can do this:
+
+    people/*splat:
+      rewrite: /people
+
+And all requests for `/people/whatever/else` will be handled as if they were requests for /people. This is a nice way to do have a single handler for a range of urls where the data is actually fetched client side. (It's like single page apps, but with the option of having a set of pages.)
+
+### Automatic SSL via Let's Encrypt
 
 You'll always want to use SSL in production, since the session cookies (and tokens, and basic auth creds) are unprotected otherwise.
 

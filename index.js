@@ -23,6 +23,7 @@ const signup = require('./lib/signup')
 const cron = require('./lib/cron')
 const headers = require('./lib/headers')
 const helmet = require('helmet')
+const rewrite = require('./lib/rewrite')
 
 const altcloud = function (options) {
   const app = express()
@@ -54,8 +55,9 @@ const altcloud = function (options) {
   app.use(tokenAuth(opts))
   app.use(compression())
   app.use(vhosts(opts))
-  app.use(altFormats(opts))
   app.use(accessRules(opts))
+  app.use(rewrite(opts))
+  app.use(altFormats(opts))
   app.use(accessEnforcement(opts))
   app.use(headers(opts))
   app.use(frontMatter(opts))
