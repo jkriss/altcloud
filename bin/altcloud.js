@@ -40,7 +40,7 @@ if (command === 'server') {
   append('.tokens', newLine)
 } else if (command === 'add-invitation') {
   const newLine = addInvitation(argv._[1])
-  append('.tokens', newLine)
+  append('.invitations', newLine)
 } else if (command === 'keys') {
   const root = argv._[1] || './'
   keys(root)
