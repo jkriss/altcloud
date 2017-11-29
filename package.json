@@ -9,11 +9,7 @@
   },
   "license": "MIT",
   "bin": {
-    "altcloud": "bin/altcloud.js",
-    "altcloud-add-user": "bin/add-user.js",
-    "altcloud-add-token": "bin/add-token.js",
-    "altcloud-add-invitation": "bin/add-invitation.js",
-    "altcloud-keys": "bin/keys.js"
+    "altcloud": "bin/altcloud.js"
   },
   "scripts": {
     "test": "standard && tape tests/**/**/*.js | faucet",
