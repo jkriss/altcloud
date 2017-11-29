@@ -1,5 +1,5 @@
 [Service]
-ExecStart=/usr/bin/altcloud /home/altcloud/webroot
+ExecStart=/usr/bin/altcloud server /home/altcloud/webroot
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
