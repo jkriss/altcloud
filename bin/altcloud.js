@@ -8,6 +8,7 @@ const keys = require('../lib/cli/keys')
 const addUser = require('../lib/cli/add-user')
 const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
+const dat = require('../lib/dat')
 
 const append = function(file, line) {
   const root = argv.root || process.cwd()
@@ -21,13 +22,18 @@ const append = function(file, line) {
 const command = argv._[0] || 'server'
 
 if (command === 'server') {
+  const root = argv._[1] || process.cwd()
   const opts = {
-    root: argv._[1] || process.cwd(),
+    root: root,
     port: argv.p || 3000,
     logLevel: argv.debug ? 'debug' : 'info',
     ssl: argv.ssl ? true : process.env.NODE_ENV === 'production'
   }
   server(opts)
+  // run a dat server in parallel if desired
+  if (argv.dat) {
+    dat(root)
+  }
 } else if (command === 'add-user') {
   if (argv._.length === 1 || argv._.length >= 4) {
     console.error('Usage: add-user <username> <password>')

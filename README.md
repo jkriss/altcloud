@@ -28,6 +28,7 @@ Currently, altcloud supports:
 - PUT and DELETE operations (when authorized)
 - JSON collections
 - automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
+- optional [dat](https://datproject.org/) support
 
 ## Setup
 
@@ -295,9 +296,11 @@ You'll want a `.config` file in your root directory that looks something like th
 ## Running
 
     npm install -g altcloud
-    altcloud .
+    altcloud
 
 You can also specify the port, e.g. `altcloud -p 8888`, or use the debug flag to see all logs (`altcloud --debug`).
+
+To host all of your files (even private keys and private files) as a dat repo, run with the `--dat` flag. Your dat url will be saved in `.dat-link` in your working directory.
 
 ## Installing on Digital Ocean
 
