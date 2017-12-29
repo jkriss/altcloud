@@ -21,6 +21,7 @@ const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
 const signup = require('./lib/signup')
 const cron = require('./lib/cron')
+const passport = require('./lib/passport-adapters')
 const headers = require('./lib/headers')
 const helmet = require('helmet')
 const rewrite = require('./lib/rewrite')
@@ -47,6 +48,7 @@ const altcloud = function (options) {
 
   app.use('/', loginForm(opts))
   app.use('/', signup(opts))
+  app.use('/', passport(opts))
 
   app.use(helmet())
   app.use(basicAuth(opts))
@@ -70,8 +72,9 @@ const altcloud = function (options) {
 
   // error handler
   app.use(function (err, req, res, next) {
+    opts.logger.warn("Error:", err, "status:", err.status || 500)
+    res.status(err.status || 500)
     if (err && req.headers['content-type'] === 'application/json' && err.status) {
-      res.status(err.status)
       res.json({ message: err.message })
     } else {
       next()

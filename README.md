@@ -24,6 +24,7 @@ Currently, altcloud supports:
 - basic auth
 - cookie-based sessions
 - token-based authentication
+- Google authentication
 - path-based access rules
 - PUT and DELETE operations (when authorized)
 - JSON collections
@@ -204,6 +205,21 @@ You can generate a token for this purpose by running the `altcloud add-token` co
 This will add a line to the YAML-formatted `.tokens` file of the form `token: username`.
 
 Then you can make requests like '/some-path?token=token-value' and authenticate that way.
+
+### Google authentication
+
+If you're willing to have an external dependency, it's often easier to use a third party for authentication, like Google.
+
+You can set up an OAuth client id via Google's [Developer Console](https://console.developers.google.com/apis/credentials), then add the following to a `.config` file in your altcloud directory:
+
+    authentication:
+      host: localhost:3000 # domain and port, if applicable
+      adapters:
+        google:
+          clientId: <your client id>
+          clientSecret: <your client secret>
+
+Now you can go to `/auth/google` to start the login flow. If you want to redirect somewhere other than the requesting page on success, you can add a `redirect` querystring argument, like `/auth/google?redirect=other-url`.
 
 ### Path-based access rules
 
