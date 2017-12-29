@@ -8,6 +8,7 @@ const keys = require('../lib/cli/keys')
 const addUser = require('../lib/cli/add-user')
 const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
+const secrets = require('../lib/cli/secrets')
 const dat = require('../lib/dat')
 
 const append = function(file, line) {
@@ -50,6 +51,10 @@ if (command === 'server') {
 } else if (command === 'keys') {
   const root = argv._[1] || './'
   keys(root)
+} else if (command === 'encrypt') {
+  secrets.encryptSecrets(argv.p)
+} else if (command === 'decrypt') {
+  secrets.decryptSecrets(argv.p)
 } else if (argv._.length >= 2) {
   console.error("Too many arguments")
   process.exit(1)

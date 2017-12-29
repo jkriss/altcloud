@@ -30,6 +30,7 @@
     "cron-parser": "^2.3.0",
     "dat-node": "^3.5.5",
     "express": "^4.14.0",
+    "flat": "^4.0.0",
     "front-matter": "^2.1.1",
     "helmet": "^3.4.0",
     "http-errors": "^1.5.1",
@@ -45,6 +46,7 @@
     "passport-google-oauth20": "^1.0.0",
     "pem": "^1.9.4",
     "route-parser": "0.0.5",
+    "secure-keys": "^1.0.0",
     "winston": "^2.3.0"
   },
   "devDependencies": {
