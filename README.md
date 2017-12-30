@@ -116,6 +116,8 @@ Here's an example. If you have this file saved as `layout.html`:
 
 Note: the contents of the requested file are injected directly, without additional variable replacement. (You can't use front matter variables in the main content.)
 
+That said, the layout file is processed with the [Liquid](http://shopify.github.io/liquid/) template language. You can provide additional variables in the front matter of the layout file itself. (This is handy for generating navigation links or other iteration-driven template elements.)
+
 ### Markdown
 
 [Markdown](https://en.wikipedia.org/wiki/Markdown) is a handy way to write lightly formatted html. If you have a file with a suffix of `md` or `markdown`, that will be converted into html.
