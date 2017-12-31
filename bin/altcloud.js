@@ -27,7 +27,8 @@ if (command === 'server') {
     root: root,
     port: argv.p || 3000,
     logLevel: argv.debug ? 'debug' : 'info',
-    ssl: argv.ssl ? true : process.env.NODE_ENV === 'production'
+    ssl: argv.ssl ? true : process.env.NODE_ENV === 'production',
+    readOnly: argv['read-only'] || !!argv.mirror
   }
   server(opts)
   // run a dat server in parallel if desired

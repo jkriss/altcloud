@@ -228,6 +228,11 @@ You can also use the special role `authenticated`, which will apply to anyone wh
     /members-only:
       read: authenticated
 
+There's also a special role `nobody`, which will block access for all users, logged in or not.
+
+    /no-deletes:
+      delete: nobody
+
 It's also possible to use variables in the paths. A segment of a path (between slashes) is specified by `:variable` and a wildcard match (anything *including* slashes) is specified by `*variable`. Then, in the rules, you can use `$variable`.
 
 This lets us do things like create per-user spaces. For instance:
