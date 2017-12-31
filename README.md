@@ -28,6 +28,8 @@ Currently, altcloud supports:
 - path-based access rules
 - PUT and DELETE operations (when authorized)
 - JSON collections
+- path rewriting
+- custom headers
 - automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
 - optional [dat](https://datproject.org/) support
 
@@ -299,6 +301,17 @@ If you want a single page to handle a whole set of urls, you can set a rewrite r
       rewrite: /people
 
 And all requests for `/people/whatever/else` will be handled as if they were requests for /people. This is a nice way to do have a single handler for a range of urls where the data is actually fetched client side. (It's like single page apps, but with the option of having a set of pages.)
+
+### Custom headers
+
+If you want to add http headers for a given path or pattern, you can add a `headers` value to the `.access` file.
+
+For instance, to cache all paths under `/assets` for 24 hours, add this:
+
+    assets/*splat:
+      headers:
+        Cache-Control: max-age=86400
+
 
 ### Automatic SSL via Let's Encrypt
 
