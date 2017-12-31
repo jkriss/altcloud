@@ -32,7 +32,10 @@ if (command === 'server') {
   server(opts)
   // run a dat server in parallel if desired
   if (argv.dat) {
-    dat(root)
+    dat.serve(root)
+  }
+  if (argv.mirror) {
+    dat.mirror(argv.mirror, root)
   }
 } else if (command === 'add-user') {
   if (argv._.length === 1 || argv._.length >= 4) {
