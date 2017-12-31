@@ -2,6 +2,7 @@
 const argv = require('minimist')(process.argv.slice(2))
 const path = require('path')
 const fs = require('fs')
+const del = require('del')
 
 const server = require('../lib/cli/server')
 const keys = require('../lib/cli/keys')
@@ -54,6 +55,8 @@ if (command === 'server') {
 } else if (command === 'keys') {
   const root = argv._[1] || './'
   keys(root)
+} else if (command === 'fork') {
+  del.sync(['dat.json', '.dat/**'])
 } else if (argv._.length >= 2) {
   console.error("Too many arguments")
   process.exit(1)
