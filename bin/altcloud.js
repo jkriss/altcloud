@@ -47,8 +47,10 @@ if (command === 'server') {
     append('.passwords', newLine)
   }
 } else if (command === 'add-token') {
-  const newLine = addToken(argv._[1])
-  append('.tokens', newLine)
+  const username = argv._[1]
+  const token = addToken(username)
+  console.log(`New token for ${username}: ${token.unencryptedToken} (will not be shown again)`)
+  append('.tokens', token.tokenLine)
 } else if (command === 'add-invitation') {
   const newLine = addInvitation(argv._[1])
   append('.invitations', newLine)
