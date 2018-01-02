@@ -25,8 +25,6 @@
       "pkg --targets node8-linux-armv6 --output binaries/linux-armv6/altcloud package.json",
     "pkg-arm7":
       "pkg --targets node8-linux-armv7 --output binaries/linux-armv7/altcloud package.json",
-    "pkg-arm-remote":
-      "ssh root@163.172.156.83 \"cd ~/altcloud && git pull && npm run pkg-arm7 && npm run upload\"",
     "pkg":
       "npm run pkg-arm6 ; npm run pkg-arm7 ; npm run pkg-mac ; npm run pkg-linux ; npm run pkg-win",
     "upload":
