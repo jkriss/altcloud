@@ -9,7 +9,7 @@ test('set user if token is valid', function(t) {
     method: 'GET',
     url: '/',
     query: {
-      token: 'bff4aee0447777ed40f7bf56aeb34e894fbcfaeb0ef09445033f431f7613cf4a'
+      token: '516e4d5576676b36de54979187826b7c'
     }
   })
 
