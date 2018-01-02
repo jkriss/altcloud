@@ -2,7 +2,7 @@ const test = require('tape')
 const config = require('../lib/config')
 const httpMocks = require('node-mocks-http')
 
-test('load additional config data if present', function (t) {
+test('load additional config data if present', function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -12,15 +12,15 @@ test('load additional config data if present', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = config({root: `${__dirname}/data/`})
+  const handler = config({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equal(req.altcloud.config.foo, 'bar')
   })
 })
 
-test('load nested config', function (t) {
+test('load nested config', function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -30,9 +30,9 @@ test('load nested config', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = config({root: `${__dirname}/data/`})
+  const handler = config({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equal(req.altcloud.config.letsencrypt.email, 'user@example.com')
   })

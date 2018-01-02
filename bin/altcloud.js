@@ -2,8 +2,8 @@
 const argv = require('minimist')(process.argv.slice(2))
 
 if (argv.debug) {
-  process.env.DEBUG = "altcloud:*"
-  console.log("turned on debug pattern", process.env.DEBUG)
+  process.env.DEBUG = 'altcloud:*'
+  console.log('turned on debug pattern', process.env.DEBUG)
 }
 
 const path = require('path')
@@ -20,7 +20,7 @@ const dat = require('../lib/dat')
 const append = function(file, line) {
   const root = argv.root || process.cwd()
   const outputFile = path.join(root, file)
-  console.log("Appending to", outputFile)
+  console.log('Appending to', outputFile)
   fs.appendFileSync(outputFile, `${line}\n`)
 }
 
@@ -55,7 +55,11 @@ if (command === 'server') {
 } else if (command === 'add-token') {
   const username = argv._[1]
   const token = addToken(username)
-  console.log(`New token for ${username}: ${token.unencryptedToken} (will not be shown again)`)
+  console.log(
+    `New token for ${username}: ${
+      token.unencryptedToken
+    } (will not be shown again)`
+  )
   append('.tokens', token.tokenLine)
 } else if (command === 'add-invitation') {
   const newLine = addInvitation(argv._[1])
@@ -66,8 +70,8 @@ if (command === 'server') {
 } else if (command === 'fork') {
   del.sync(['dat.json', '.dat/**'])
 } else if (argv._.length >= 2) {
-  console.error("Too many arguments")
+  console.error('Too many arguments')
   process.exit(1)
 } else {
-  console.log("Usage: altcloud [add-user]")
+  console.log('Usage: altcloud [add-user]')
 }
