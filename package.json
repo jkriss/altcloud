@@ -23,6 +23,8 @@
       "pkg --targets node8-win-x64 --output binaries/win/altcloud.exe package.json",
     "pkg-arm":
       "pkg --targets node8-linux-armv7 --output binaries/linux-armv7/altcloud package.json",
+    "pkg-arm-remote":
+      "ssh root@163.172.156.83 \"cd ~/altcloud && git pull && npm run pkg-arm && npm run upload\"",
     "pkg":
       "npm run pkg-arm ; npm run pkg-mac ; npm run pkg-linux ; npm run pkg-win",
     "upload":
@@ -73,7 +75,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "node-mocks-http": "^1.5.5",
-    "pkg": "^4.3.0-beta.1",
+    "pkg": "4.2.2",
     "prettier": "1.9.2",
     "supertest": "^2.0.1",
     "tape": "^4.6.3"
