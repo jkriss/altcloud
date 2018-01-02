@@ -79,6 +79,9 @@
     "tape": "^4.6.3"
   },
   "pkg": {
-    "assets": "node_modules/localhost.daplie.com-certificates/*.pem"
+    "assets": [
+      "node_modules/localhost.daplie.com-certificates/*.pem",
+      "node_modules/blake2b-wasm/blake2b.wasm"
+    ]
   }
 }
