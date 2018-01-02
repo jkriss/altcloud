@@ -15,9 +15,18 @@
     "test": "tape tests/**/**/*.js | faucet",
     "lint": "prettier -write \"{bin,lib,tests}/**/*.js\"",
     "precommit": "lint-staged",
-    "build": "pkg package.json",
+    "pkg-mac":
+      "pkg --targets node8-macos-x64 --output binaries/macos/altcloud package.json",
+    "pkg-linux":
+      "pkg --targets node8-linux-x64 --output binaries/linux-x64/altcloud package.json",
+    "pkg-win":
+      "pkg --targets node8-win-x64 --output binaries/win/altcloud.exe package.json",
+    "pkg-arm":
+      "pkg --targets node8-linux-armv7 --output binaries/linux-armv7/altcloud package.json",
+    "pkg":
+      "npm run pkg-arm ; npm run pkg-mac ; npm run pkg-linux ; npm run pkg-win",
     "upload":
-      "scp altcloud-linux altcloud@tinyserver.club:~/webroot/altcloud.io/linux-x64/altcloud && scp altcloud-macos altcloud@tinyserver.club:~/webroot/altcloud.io/macos/altcloud && scp altcloud-win.exe altcloud@tinyserver.club:~/webroot/altcloud.io/win/altcloud.exe"
+      "rsync -rva binaries/* altcloud@tinyserver.club:~/webroot/altcloud.io/"
   },
   "prettier": {
     "singleQuote": true,
