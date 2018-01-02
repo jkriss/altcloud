@@ -1,5 +1,11 @@
 #! /usr/bin/env node
 const argv = require('minimist')(process.argv.slice(2))
+
+if (argv.debug) {
+  process.env.DEBUG = "altcloud:*"
+  console.log("turned on debug pattern", process.env.DEBUG)
+}
+
 const path = require('path')
 const fs = require('fs')
 const del = require('del')
