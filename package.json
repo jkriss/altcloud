@@ -65,6 +65,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "pem": "^1.9.4",
+    "polo": "^0.8.1",
     "route-parser": "0.0.5",
     "slug": "^0.9.1",
     "winston": "^2.3.0"

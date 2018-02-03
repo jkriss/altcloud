@@ -1,0 +1,6 @@
+{
+  "main": "package.json",
+  "out": "package-linux-arm32v7.bin",
+  "target": "linux-arm32v7",
+  "preset": "speed"
+}

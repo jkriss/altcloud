@@ -16,6 +16,9 @@ const addUser = require('../lib/cli/add-user')
 const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
 const dat = require('../lib/dat')
+const heartbeat =
+  typeof argv.broadcast === 'number' ? argv.broadcast : 60 * 1000 // check in once a minute
+const Discovery = require('../lib/discovery')
 
 const append = function(file, line) {
   const root = argv.root || process.cwd()
@@ -30,11 +33,13 @@ const command = argv._[0] || 'server'
 
 if (command === 'server') {
   const root = argv._[1] || process.cwd()
+  const port = argv.p || 3000
+  const ssl = argv.ssl ? true : process.env.NODE_ENV === 'production'
   const opts = {
     root: root,
-    port: argv.p || 3000,
+    port: port,
     logLevel: argv.debug ? 'debug' : 'info',
-    ssl: argv.ssl ? true : process.env.NODE_ENV === 'production',
+    ssl: ssl,
     readOnly: argv['read-only'] || !!argv.mirror
   }
   server(opts)
@@ -45,6 +50,44 @@ if (command === 'server') {
   if (argv.mirror) {
     dat.mirror(argv.mirror, root)
   }
+  if (argv.broadcast) {
+    console.log('broadcasting servive with heartbeat', heartbeat)
+    const discovery = Discovery({ heartbeat })
+    discovery.put({
+      name: 'altcloud' || arvg.name,
+      host: argv.host, // defaults to the network ip of the machine
+      port: port, // we are listening on port 8080.
+      proto: ssl ? 'https' : 'http'
+    })
+  }
+} else if (command === 'scan') {
+  const discovery = Discovery({ heartbeat: 500 })
+  discovery.scan(function(err, services) {
+    if (argv.json) {
+      console.log(services)
+    } else {
+      services.forEach(function(service) {
+        console.log(`${service.name} at ${service.proto}://${service.address}`)
+      })
+    }
+    process.exit()
+  })
+} else if (command === 'watch') {
+  const discovery = Discovery({ heartbeat: 500 })
+  discovery.watch(
+    function(name, service) {
+      console.log(
+        `${service.name} is available at ${service.proto}://${service.address}`
+      )
+    },
+    function(name, service) {
+      console.log(
+        `${service.name} is no longer available at ${service.proto}://${
+          service.address
+        }`
+      )
+    }
+  )
 } else if (command === 'add-user') {
   if (argv._.length === 1 || argv._.length >= 4) {
     console.error('Usage: add-user <username> <password>')
