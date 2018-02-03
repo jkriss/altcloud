@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 const argv = require('minimist')(process.argv.slice(2))
 
 if (argv.debug) {
@@ -15,7 +14,7 @@ const keys = require('../lib/cli/keys')
 const addUser = require('../lib/cli/add-user')
 const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
-const dat = require('../lib/dat')
+let dat
 const heartbeat =
   typeof argv.broadcast === 'number' ? argv.broadcast : 60 * 1000 // check in once a minute
 const Discovery = require('../lib/discovery')
@@ -45,9 +44,11 @@ if (command === 'server') {
   server(opts)
   // run a dat server in parallel if desired
   if (argv.dat) {
+    if (!dat) dat = require('../lib/dat')
     dat.serve(root)
   }
   if (argv.mirror) {
+    if (!dat) dat = require('../lib/dat')
     dat.mirror(argv.mirror, root)
   }
   if (argv.broadcast) {

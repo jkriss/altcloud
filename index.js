@@ -23,16 +23,19 @@ const collections = require('./lib/collections')
 const signup = require('./lib/signup')
 const cron = require('./lib/cron')
 const headers = require('./lib/headers')
-const helmet = require('helmet')
+// const helmet = require('helmet')
 const rewrite = require('./lib/rewrite')
 
-const altcloud = function (options) {
+const altcloud = function(options) {
   const app = express()
 
-  const opts = Object.assign({
-    root: '.',
-    logger: winston
-  }, options)
+  const opts = Object.assign(
+    {
+      root: '.',
+      logger: winston
+    },
+    options
+  )
 
   opts.root = Path.resolve(opts.root)
   opts.logger.level = opts.logLevel
@@ -41,7 +44,7 @@ const altcloud = function (options) {
 
   const cookies = cookieAuth(opts)
 
-  app.use(function (req, res, next) {
+  app.use(function(req, res, next) {
     opts.logger.info(req.method, req.url)
     next()
   })
@@ -49,7 +52,7 @@ const altcloud = function (options) {
   app.use('/', loginForm(opts))
   app.use('/', signup(opts))
 
-  app.use(helmet())
+  // app.use(helmet())
   app.use(basicAuth(opts))
   app.use(cookieParser())
   app.use(cookies.checkCookie)
@@ -71,8 +74,12 @@ const altcloud = function (options) {
   app.use(collections(opts))
 
   // error handler
-  app.use(function (err, req, res, next) {
-    if (err && req.headers['content-type'] === 'application/json' && err.status) {
+  app.use(function(err, req, res, next) {
+    if (
+      err &&
+      req.headers['content-type'] === 'application/json' &&
+      err.status
+    ) {
       res.status(err.status)
       res.json({ message: err.message })
     } else {
