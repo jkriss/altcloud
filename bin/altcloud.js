@@ -51,10 +51,16 @@ if (command === 'server') {
     dat.mirror(argv.mirror, root)
   }
   if (argv.broadcast) {
-    console.log('broadcasting servive with heartbeat', heartbeat)
+    const serviceName = argv.name || 'altcloud'
+    console.log(
+      'broadcasting servive with heartbeat',
+      heartbeat,
+      'and name',
+      serviceName
+    )
     const discovery = Discovery({ heartbeat })
     discovery.put({
-      name: 'altcloud' || arvg.name,
+      name: serviceName,
       host: argv.host, // defaults to the network ip of the machine
       port: port, // we are listening on port 8080.
       proto: ssl ? 'https' : 'http'
