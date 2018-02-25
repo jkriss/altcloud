@@ -2,7 +2,7 @@ const test = require('tape')
 const accessEnforcement = require('../lib/access-enforcement')
 const httpMocks = require('node-mocks-http')
 
-test('let unauthed users view an unrestricted resource', function (t) {
+test('let unauthed users view an unrestricted resource', function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -12,15 +12,15 @@ test('let unauthed users view an unrestricted resource', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equals(res.statusCode, 200)
   })
 })
 
-test("don't let unauthed users view a restricted resource", function (t) {
+test("don't let unauthed users view a restricted resource", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -33,16 +33,16 @@ test("don't let unauthed users view a restricted resource", function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err)
     t.equals(err.status, 404)
   })
 })
 
-test("let authed users view a restricted resource if they're on the list", function (t) {
+test("let authed users view a restricted resource if they're on the list", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -56,15 +56,15 @@ test("let authed users view a restricted resource if they're on the list", funct
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equals(res.statusCode, 200)
   })
 })
 
-test("let authed users view a restricted resource if they're on a list with multiple users", function (t) {
+test("let authed users view a restricted resource if they're on a list with multiple users", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -78,15 +78,15 @@ test("let authed users view a restricted resource if they're on a list with mult
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equals(res.statusCode, 200)
   })
 })
 
-test("let authed users view a restricted resource if there's an 'authenticated' rule", function (t) {
+test("let authed users view a restricted resource if there's an 'authenticated' rule", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -100,15 +100,15 @@ test("let authed users view a restricted resource if there's an 'authenticated' 
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equals(res.statusCode, 200)
   })
 })
 
-test("don't let unauthed users view a restricted resource if they're not on the list, even if 'authenticated' is", function (t) {
+test("don't let unauthed users view a restricted resource if they're not on the list, even if 'authenticated' is", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -121,16 +121,16 @@ test("don't let unauthed users view a restricted resource if they're not on the 
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err, 'should throw an error')
     t.equals(err && err.status, 404)
   })
 })
 
-test("don't let authed users view a restricted resource if they're not on the list", function (t) {
+test("don't let authed users view a restricted resource if they're not on the list", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -144,16 +144,16 @@ test("don't let authed users view a restricted resource if they're not on the li
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err)
     t.equals(err.status, 404)
   })
 })
 
-test("don't let people view .access if there's no rule for it", function (t) {
+test("don't let people view .access if there's no rule for it", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -164,16 +164,16 @@ test("don't let people view .access if there's no rule for it", function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err)
     t.equals(err.status, 404)
   })
 })
 
-test("don't let people view .tokens if there's no rule for it", function (t) {
+test("don't let people view .tokens if there's no rule for it", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -184,16 +184,16 @@ test("don't let people view .tokens if there's no rule for it", function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err)
     t.equals(err.status, 404)
   })
 })
 
-test("don't let people view .keys/private.key if there's no rule for it", function (t) {
+test("don't let people view .keys/private.key if there's no rule for it", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -204,16 +204,16 @@ test("don't let people view .keys/private.key if there's no rule for it", functi
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err)
     t.equals(err.status, 404)
   })
 })
 
-test("don't let people view .keys/private.key EVER", function (t) {
+test("don't let people view .keys/private.key EVER", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -227,16 +227,16 @@ test("don't let people view .keys/private.key EVER", function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.ok(err)
     t.equals(err.status, 404)
   })
 })
 
-test("let people view .keys/public.pem if it's explicitly allowed", function (t) {
+test("let people view .keys/public.pem if it's explicitly allowed", function(t) {
   t.plan(2)
 
   const req = httpMocks.createRequest({
@@ -249,10 +249,10 @@ test("let people view .keys/public.pem if it's explicitly allowed", function (t)
 
   const res = httpMocks.createResponse()
 
-  const handler = accessEnforcement({root: `${__dirname}/data/`})
+  const handler = accessEnforcement({ root: `${__dirname}/data/` })
 
   // don't leak info–return 404 if not authorized
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.equals(res.statusCode, 200)
   })

@@ -12,13 +12,34 @@
     "altcloud": "bin/altcloud.js"
   },
   "scripts": {
-    "test": "standard && tape tests/**/**/*.js | faucet",
-    "standardize": "standard --fix",
-    "build": "pkg package.json",
-    "upload": "scp altcloud-linux altcloud@tinyserver.club:~/webroot/altcloud.io/linux-x64/altcloud && scp altcloud-macos altcloud@tinyserver.club:~/webroot/altcloud.io/macos/altcloud && scp altcloud-win.exe altcloud@tinyserver.club:~/webroot/altcloud.io/win/altcloud.exe"
+    "test": "tape tests/**/**/*.js | faucet",
+    "lint": "prettier -write \"{bin,lib,tests}/**/*.js\"",
+    "precommit": "lint-staged",
+    "pkg-mac":
+      "pkg --targets node8-macos-x64 --output binaries/macos/altcloud package.json",
+    "pkg-linux":
+      "pkg --targets node8-linux-x64 --output binaries/linux-x64/altcloud package.json",
+    "pkg-win":
+      "pkg --targets node8-win-x64 --output binaries/win/altcloud.exe package.json",
+    "pkg-arm6":
+      "pkg --targets node8-linux-armv6 --output binaries/linux-armv6/altcloud package.json",
+    "pkg-arm7":
+      "pkg --targets node8-linux-armv7 --output binaries/linux-armv7/altcloud package.json",
+    "pkg":
+      "npm run pkg-arm6 ; npm run pkg-arm7 ; npm run pkg-mac ; npm run pkg-linux ; npm run pkg-win",
+    "upload":
+      "rsync -rva binaries/* altcloud@tinyserver.club:~/webroot/altcloud.io/"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
+    "array-unique": "^0.3.2",
     "basic-auth": "^1.1.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
@@ -28,9 +49,11 @@
     "cors": "^2.8.1",
     "cron": "^1.2.1",
     "cron-parser": "^2.3.0",
-    "dat-node": "^3.5.5",
+    "dat-node": "^3.5.6",
+    "debug": "^3.1.0",
     "express": "^4.14.0",
     "front-matter": "^2.1.1",
+    "handlebars": "^4.0.11",
     "helmet": "^3.4.0",
     "http-errors": "^1.5.1",
     "ip": "^1.1.4",
@@ -43,20 +66,27 @@
     "mkdirp": "^0.5.1",
     "pem": "^1.9.4",
     "request-promise": "^4.2.2",
-    "route-parser": "0.0.5",
+    "polo": "^0.8.1",
     "stripe": "^5.5.0",
+    "route-parser": "0.0.5",
+    "slug": "^0.9.1",
     "winston": "^2.3.0"
   },
   "devDependencies": {
     "del": "^2.2.2",
     "faucet": "0.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "node-mocks-http": "^1.5.5",
-    "pkg": "^4.3.0-beta.1",
-    "standard": "^8.6.0",
+    "pkg": "4.2.2",
+    "prettier": "1.9.2",
     "supertest": "^2.0.1",
     "tape": "^4.6.3"
   },
   "pkg": {
-    "assets": "node_modules/localhost.daplie.com-certificates/*.pem"
+    "assets": [
+      "node_modules/localhost.daplie.com-certificates/*.pem",
+      "node_modules/blake2b-wasm/blake2b.wasm"
+    ]
   }
 }

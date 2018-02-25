@@ -2,7 +2,7 @@ const test = require('tape')
 const accessRules = require('../lib/access-rules')
 const httpMocks = require('node-mocks-http')
 
-test('load rules for path', function (t) {
+test('load rules for path', function(t) {
   t.plan(3)
 
   const req = httpMocks.createRequest({
@@ -12,16 +12,16 @@ test('load rules for path', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.equal(req.altcloud.rules, 'user1')
   })
 })
 
-test('parse multiple users', function (t) {
+test('parse multiple users', function(t) {
   t.plan(3)
 
   const req = httpMocks.createRequest({
@@ -31,16 +31,16 @@ test('parse multiple users', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.deepEqual(req.altcloud.rules, ['user1', 'user2'])
   })
 })
 
-test('load rules from parent dir if not present', function (t) {
+test('load rules from parent dir if not present', function(t) {
   t.plan(3)
 
   const req = httpMocks.createRequest({
@@ -50,16 +50,16 @@ test('load rules from parent dir if not present', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.equal(req.altcloud.rules, 'user2')
   })
 })
 
-test('prefer current dir access file', function (t) {
+test('prefer current dir access file', function(t) {
   t.plan(3)
 
   const req = httpMocks.createRequest({
@@ -69,16 +69,16 @@ test('prefer current dir access file', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.equal(req.altcloud.rules, 'user3')
   })
 })
 
-test('load rules for actual path if it is an alt format', function (t) {
+test('load rules for actual path if it is an alt format', function(t) {
   t.plan(3)
 
   // rule is for /example.md, but request is for /example
@@ -92,16 +92,16 @@ test('load rules for actual path if it is an alt format', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.equal(req.altcloud.rules, 'all')
   })
 })
 
-test('substitute user variables', function (t) {
+test('substitute user variables', function(t) {
   t.plan(3)
 
   // rule is for /example.md, but request is for /example
@@ -112,16 +112,16 @@ test('substitute user variables', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.equal(req.altcloud.rules, 'someuser')
   })
 })
 
-test('substitute user variables for subdirs, too', function (t) {
+test('substitute user variables for subdirs, too', function(t) {
   t.plan(3)
 
   // rule is for /example.md, but request is for /example
@@ -132,9 +132,9 @@ test('substitute user variables for subdirs, too', function (t) {
 
   const res = httpMocks.createResponse()
 
-  const handler = accessRules({root: `${__dirname}/data/`})
+  const handler = accessRules({ root: `${__dirname}/data/` })
 
-  handler(req, res, function (err) {
+  handler(req, res, function(err) {
     t.error(err)
     t.ok(req.altcloud)
     t.equal(req.altcloud.rules, 'user1')

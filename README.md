@@ -14,23 +14,23 @@ This implementation of the altcloud server is written in node.js, but the specif
 
 Currently, altcloud supports:
 
-- static files serving
-- YAML front matter
-- layouts
-- Markdown
-- friendly urls
-- virtual hosts
-- usernames and passwords
-- basic auth
-- cookie-based sessions
-- token-based authentication
-- path-based access rules
-- PUT and DELETE operations (when authorized)
-- JSON collections
-- path rewriting
-- custom headers
-- automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
-- optional [dat](https://datproject.org/) support
+* static files serving
+* YAML front matter
+* layouts
+* Markdown
+* friendly urls
+* virtual hosts
+* usernames and passwords
+* basic auth
+* cookie-based sessions
+* token-based authentication
+* path-based access rules
+* PUT and DELETE operations (when authorized)
+* JSON collections
+* path rewriting
+* custom headers
+* automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
+* optional [dat](https://datproject.org/) support
 
 ## Setup
 
@@ -232,7 +232,12 @@ You can also use the special role `authenticated`, which will apply to anyone wh
     /members-only:
       read: authenticated
 
-It's also possible to use variables in the paths. A segment of a path (between slashes) is specified by `:variable` and a wildcard match (anything *including* slashes) is specified by `*variable`. Then, in the rules, you can use `$variable`.
+There's also a special role `nobody`, which will block access for all users, logged in or not.
+
+    /no-deletes:
+      delete: nobody
+
+It's also possible to use variables in the paths. A segment of a path (between slashes) is specified by `:variable` and a wildcard match (anything _including_ slashes) is specified by `*variable`. Then, in the rules, you can use `$variable`.
 
 This lets us do things like create per-user spaces. For instance:
 
@@ -295,7 +300,6 @@ For instance, to cache all paths under `/assets` for 24 hours, add this:
     assets/*splat:
       headers:
         Cache-Control: max-age=86400
-
 
 ### Automatic SSL via Let's Encrypt
 
