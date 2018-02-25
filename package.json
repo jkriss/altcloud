@@ -42,7 +42,9 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "pem": "^1.9.4",
+    "request-promise": "^4.2.2",
     "route-parser": "0.0.5",
+    "stripe": "^5.5.0",
     "winston": "^2.3.0"
   },
   "devDependencies": {

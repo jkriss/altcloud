@@ -24,6 +24,7 @@ const cron = require('./lib/cron')
 const headers = require('./lib/headers')
 const helmet = require('helmet')
 const rewrite = require('./lib/rewrite')
+const stripe = require('./lib/stripe')
 
 const altcloud = function (options) {
   const app = express()
@@ -47,6 +48,7 @@ const altcloud = function (options) {
 
   app.use('/', loginForm(opts))
   app.use('/', signup(opts))
+  app.use('/_stripe/', stripe(opts))
 
   app.use(helmet())
   app.use(basicAuth(opts))
