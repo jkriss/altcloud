@@ -14,21 +14,20 @@ This implementation of the altcloud server is written in node.js, but the specif
 
 Currently, altcloud supports:
 
-- static files serving
-- YAML front matter
-- layouts
-- Markdown
-- friendly urls
-- virtual hosts
-- usernames and passwords
-- basic auth
-- cookie-based sessions
-- token-based authentication
-- path-based access rules
-- PUT and DELETE operations (when authorized)
-- JSON collections
-- automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
-- optional [dat](https://datproject.org/) support
+* static files serving
+* YAML front matter
+* layouts
+* Markdown
+* friendly urls
+* virtual hosts
+* usernames and passwords
+* basic auth
+* cookie-based sessions
+* token-based authentication
+* path-based access rules
+* PUT and DELETE operations (when authorized)
+* JSON collections
+* automatic HTTPS via [Let's Encrypt](https://letsencrypt.org/)
 
 ## Setup
 
@@ -233,7 +232,7 @@ There's also a special role `nobody`, which will block access for all users, log
     /no-deletes:
       delete: nobody
 
-It's also possible to use variables in the paths. A segment of a path (between slashes) is specified by `:variable` and a wildcard match (anything *including* slashes) is specified by `*variable`. Then, in the rules, you can use `$variable`.
+It's also possible to use variables in the paths. A segment of a path (between slashes) is specified by `:variable` and a wildcard match (anything _including_ slashes) is specified by `*variable`. Then, in the rules, you can use `$variable`.
 
 This lets us do things like create per-user spaces. For instance:
 
@@ -304,8 +303,6 @@ You'll want a `.config` file in your root directory that looks something like th
     altcloud
 
 You can also specify the port, e.g. `altcloud -p 8888`, or use the debug flag to see all logs (`altcloud --debug`).
-
-To host all of your files (even private keys and private files) as a dat repo, run with the `--dat` flag. Your dat url will be saved in `.dat-link` in your working directory.
 
 ## Installing on Digital Ocean
 

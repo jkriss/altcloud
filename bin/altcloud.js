@@ -15,7 +15,6 @@ const keys = require('../lib/cli/keys')
 const addUser = require('../lib/cli/add-user')
 const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
-let dat
 const heartbeat =
   typeof argv.broadcast === 'number' ? argv.broadcast : 60 * 1000 // check in once a minute
 const Discovery = require('../lib/discovery')
@@ -43,15 +42,6 @@ if (command === 'server') {
     readOnly: argv['read-only'] || !!argv.mirror
   }
   server(opts)
-  // run a dat server in parallel if desired
-  if (argv.dat) {
-    if (!dat) dat = require('../lib/dat')
-    dat.serve(root)
-  }
-  if (argv.mirror) {
-    if (!dat) dat = require('../lib/dat')
-    dat.mirror(argv.mirror, root)
-  }
   if (argv.broadcast) {
     const serviceName = argv.name || 'altcloud'
     console.log(
@@ -118,8 +108,6 @@ if (command === 'server') {
 } else if (command === 'keys') {
   const root = argv._[1] || './'
   keys(root)
-} else if (command === 'fork') {
-  del.sync(['dat.json', '.dat/**'])
 } else if (argv._.length >= 2) {
   console.error('Too many arguments')
   process.exit(1)
