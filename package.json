@@ -9,14 +9,16 @@
   },
   "license": "MIT",
   "bin": {
-    "altcloud": "bin/altcloud.js"
+    "altcloud": "bin/altcloud-executable.js"
   },
   "scripts": {
     "test": "tape tests/**/**/*.js | faucet",
     "lint": "prettier -write \"{bin,lib,tests}/**/*.js\"",
     "precommit": "lint-staged",
-    "nexe":
-      "nexe bin/altcloud.js -o binaries/macos/altcloud -r \"node_modules/localhost.daplie.com-certificates/*.pem\" -r \"node_modules/blake2b-wasm/blake2b.wasm\"",
+    "nexe:mac":
+      "nexe bin/altcloud.js -o binaries/macos/altcloud -t mac-x64-9.5.0 -r \"node_modules/localhost.daplie.com-certificates/*.pem\"",
+    "nexe:linux":
+      "nexe bin/altcloud.js -o binaries/linux-x64/altcloud -t linux-x64-9.5.0 -r \"node_modules/localhost.daplie.com-certificates/*.pem\" -r \"node_modules/node-forge/*.frag\"",
     "pkg-mac":
       "pkg --targets node8-macos-x64 --output binaries/macos/altcloud package.json",
     "pkg-linux":
@@ -76,7 +78,7 @@
     "faucet": "0.0.1",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
-    "nexe": "^2.0.0-rc.22",
+    "nexe": "^2.0.0-rc.26",
     "node-mocks-http": "^1.5.5",
     "pkg": "4.2.2",
     "prettier": "1.9.2",
