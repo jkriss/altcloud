@@ -41,8 +41,10 @@
     "marked": "^0.3.6",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "passport": "^0.4.0",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.1",
     "passport-google-oauth20": "^1.0.0",
+    "passport-oauth2": "^1.5.0",
     "pem": "^1.9.4",
     "route-parser": "0.0.5",
     "winston": "^2.3.0"
