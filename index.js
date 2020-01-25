@@ -72,7 +72,7 @@ const altcloud = function (options) {
 
   // error handler
   app.use(function (err, req, res, next) {
-    opts.logger.warn("Error:", err, "status:", err.status || 500)
+    opts.logger.warn('Error:', err, 'status:', err.status || 500)
     res.status(err.status || 500)
     if (err && req.headers['content-type'] === 'application/json' && err.status) {
       res.json({ message: err.message })

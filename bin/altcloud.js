@@ -10,10 +10,10 @@ const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
 const dat = require('../lib/dat')
 
-const append = function(file, line) {
+const append = function (file, line) {
   const root = argv.root || process.cwd()
   const outputFile = path.join(root, file)
-  console.log("Appending to", outputFile)
+  console.log('Appending to', outputFile)
   fs.appendFileSync(outputFile, `${line}\n`)
 }
 
@@ -51,8 +51,8 @@ if (command === 'server') {
   const root = argv._[1] || './'
   keys(root)
 } else if (argv._.length >= 2) {
-  console.error("Too many arguments")
+  console.error('Too many arguments')
   process.exit(1)
 } else {
-  console.log("Usage: altcloud [add-user]")
+  console.log('Usage: altcloud [add-user]')
 }
