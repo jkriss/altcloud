@@ -13,12 +13,11 @@
   },
   "scripts": {
     "test": "standard && tape tests/**/**/*.js | faucet",
-    "standardize": "standard --fix",
-    "build": "pkg package.json",
-    "upload": "scp altcloud-linux altcloud@tinyserver.club:~/webroot/altcloud.io/linux-x64/altcloud && scp altcloud-macos altcloud@tinyserver.club:~/webroot/altcloud.io/macos/altcloud && scp altcloud-win.exe altcloud@tinyserver.club:~/webroot/altcloud.io/win/altcloud.exe"
+    "standardize": "standard --fix"
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
+    "ajv": "^6.12.0",
     "basic-auth": "^1.1.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
@@ -31,17 +30,16 @@
     "dat-node": "^3.5.5",
     "express": "^4.14.0",
     "front-matter": "^2.1.1",
-    "helmet": "^3.4.0",
+    "helmet": "^3.21.3",
     "http-errors": "^1.5.1",
     "ip": "^1.1.4",
-    "js-yaml": "^3.7.0",
-    "jsonwebtoken": "^7.2.1",
-    "letsencrypt-express": "^2.0.6",
+    "js-yaml": "^3.13.1",
+    "jsonwebtoken": "^8.5.1",
     "liquid-node": "^2.6.1",
     "marked": "^0.3.6",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "pem": "^1.9.4",
+    "pem": "^1.14.4",
     "route-parser": "0.0.5",
     "winston": "^2.3.0"
   },
@@ -49,9 +47,8 @@
     "del": "^2.2.2",
     "faucet": "0.0.1",
     "node-mocks-http": "^1.5.5",
-    "pkg": "^4.3.0-beta.1",
     "standard": "^8.6.0",
-    "supertest": "^2.0.1",
+    "supertest": "^4.0.2",
     "tape": "^4.6.3"
   },
   "pkg": {
