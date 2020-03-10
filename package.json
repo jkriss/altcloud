@@ -30,6 +30,7 @@
     "dat-node": "^3.5.5",
     "express": "^4.14.0",
     "front-matter": "^2.1.1",
+    "greenlock-express": "^4.0.3",
     "helmet": "^3.21.3",
     "http-errors": "^1.5.1",
     "ip": "^1.1.4",
@@ -50,8 +51,5 @@
     "standard": "^8.6.0",
     "supertest": "^4.0.2",
     "tape": "^4.6.3"
-  },
-  "pkg": {
-    "assets": "node_modules/localhost.daplie.com-certificates/*.pem"
   }
 }
