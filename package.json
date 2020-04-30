@@ -1,6 +1,6 @@
 {
   "name": "altcloud",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A web server with extra powers. Run your own stuff.",
   "main": "index.js",
   "repository": {
