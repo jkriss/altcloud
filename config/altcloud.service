@@ -7,6 +7,7 @@ SyslogIdentifier=altcloud
 User=altcloud
 Group=altcloud
 Environment=NODE_ENV=production
+WorkingDirectory=/home/altcloud/webroot
 
 [Install]
 WantedBy=multi-user.target
