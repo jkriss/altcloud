@@ -38,7 +38,7 @@
     "jsonwebtoken": "^8.5.1",
     "liquid-node": "^2.6.1",
     "marked": "^0.3.6",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.5",
     "mkdirp": "^0.5.1",
     "pem": "^1.14.4",
     "route-parser": "0.0.5",
