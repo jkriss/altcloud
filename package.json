@@ -44,6 +44,7 @@
     "mkdirp": "^0.5.5",
     "pem": "^1.14.4",
     "route-parser": "0.0.5",
+    "time-streams": "0.0.11",
     "winston": "^2.3.0"
   },
   "devDependencies": {

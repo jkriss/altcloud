@@ -24,6 +24,7 @@ const cron = require('./lib/cron')
 const headers = require('./lib/headers')
 const helmet = require('helmet')
 const rewrite = require('./lib/rewrite')
+const { reader } = require('time-streams')
 
 const altcloud = function (options) {
   const app = express()
@@ -65,6 +66,7 @@ const altcloud = function (options) {
   app.use(layouts(opts))
   app.use(sendRenderedFile(opts))
   app.use(editFiles(opts))
+  app.use(reader(opts.root))
   app.use(staticFiles(opts))
   app.use(collections(opts))
 
