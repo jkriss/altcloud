@@ -66,7 +66,11 @@ const altcloud = function (options) {
   app.use(layouts(opts))
   app.use(sendRenderedFile(opts))
   app.use(editFiles(opts))
-  app.use(reader(opts.root))
+  app.use(reader(opts.root, {
+    getTimeStreamBasePath: req => {
+      return req.altcloud.siteBase ? Path.join(opts.root, req.altcloud.siteBase) : opts.root
+    }
+  }))
   app.use(staticFiles(opts))
   app.use(collections(opts))
 
