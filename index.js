@@ -72,6 +72,12 @@ const altcloud = function (options) {
 
   // error handler
   app.use(function (err, req, res, next) {
+    // see if we have a custom error page
+    const rules = req.altcloud.fullRules
+    if (rules[err.status]) {
+      const fileBase = req.altcloud.siteBase ? Path.join(opts.root, req.altcloud.siteBase) : opts.root
+      return res.sendFile(Path.join(fileBase, rules[err.status]))
+    }
     if (err && req.headers['content-type'] === 'application/json' && err.status) {
       res.status(err.status)
       res.json({ message: err.message })
