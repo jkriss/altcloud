@@ -4,3 +4,5 @@ npm-debug.log
 tests/data/rw
 tests/data/.invitations
 .greenlockrc
+.keys
+.config

@@ -8,6 +8,7 @@ const keys = require('../lib/cli/keys')
 const addUser = require('../lib/cli/add-user')
 const addToken = require('../lib/cli/add-token')
 const addInvitation = require('../lib/cli/add-invitation')
+const getLink = require('../lib/cli/get-link')
 
 const append = function (file, line) {
   const root = argv.root || process.cwd()
@@ -45,6 +46,8 @@ if (command === 'server') {
 } else if (command === 'keys') {
   const root = argv._[1] || './'
   keys(root)
+} else if (command === 'link') {
+  getLink(argv._[1], { root: process.cwd() })
 } else if (argv._.length >= 2) {
   console.error('Too many arguments')
   process.exit(1)
