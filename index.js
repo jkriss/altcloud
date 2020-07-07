@@ -16,6 +16,7 @@ const tokenAuth = require('./lib/token-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
 const loginForm = require('./lib/login-form')
+const linkLogin = require('./lib/link-login')
 const sendRenderedFile = require('./lib/send-rendered-file')
 const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
@@ -25,14 +26,18 @@ const passport = require('./lib/passport-adapters')
 const headers = require('./lib/headers')
 const helmet = require('helmet')
 const rewrite = require('./lib/rewrite')
+const { reader } = require('time-streams')
 
 const altcloud = function (options) {
   const app = express()
 
-  const opts = Object.assign({
-    root: '.',
-    logger: winston
-  }, options)
+  const opts = Object.assign(
+    {
+      root: '.',
+      logger: winston
+    },
+    options
+  )
 
   opts.root = Path.resolve(opts.root)
   opts.logger.level = opts.logLevel
@@ -54,6 +59,7 @@ const altcloud = function (options) {
   app.use(basicAuth(opts))
   app.use(cookieParser())
   app.use(cookies.checkCookie)
+  app.use('/', linkLogin(opts))
   app.use(tokenAuth(opts))
   app.use(compression())
   app.use(vhosts(opts))
@@ -67,14 +73,26 @@ const altcloud = function (options) {
   app.use(layouts(opts))
   app.use(sendRenderedFile(opts))
   app.use(editFiles(opts))
+  app.use(reader(opts.root))
   app.use(staticFiles(opts))
   app.use(collections(opts))
 
   // error handler
   app.use(function (err, req, res, next) {
-    opts.logger.warn('Error:', err, 'status:', err.status || 500)
-    res.status(err.status || 500)
-    if (err && req.headers['content-type'] === 'application/json' && err.status) {
+    // see if we have a custom error page
+    const rules = req.altcloud && req.altcloud.fullRules || {}
+    if (rules[err.status]) {
+      const fileBase = req.altcloud.siteBase
+        ? Path.join(opts.root, req.altcloud.siteBase)
+        : opts.root
+      return res.sendFile(Path.join(fileBase, rules[err.status]))
+    }
+    if (
+      err &&
+      req.headers['content-type'] === 'application/json' &&
+      err.status
+    ) {
+      res.status(err.status)
       res.json({ message: err.message })
     } else {
       next()

@@ -1,6 +1,6 @@
 {
   "name": "altcloud",
-  "version": "0.0.7",
+  "version": "1.0.3",
   "description": "A web server with extra powers. Run your own stuff.",
   "main": "index.js",
   "repository": {
@@ -13,52 +13,51 @@
   },
   "scripts": {
     "test": "standard && tape tests/**/**/*.js | faucet",
-    "standardize": "standard --fix",
-    "build": "pkg package.json",
-    "upload": "scp altcloud-linux altcloud@tinyserver.club:~/webroot/altcloud.io/linux-x64/altcloud && scp altcloud-macos altcloud@tinyserver.club:~/webroot/altcloud.io/macos/altcloud && scp altcloud-win.exe altcloud@tinyserver.club:~/webroot/altcloud.io/win/altcloud.exe"
+    "standardize": "standard --fix"
   },
   "author": "Jesse Kriss <jesse@jklabs.net>",
   "dependencies": {
+    "ajv": "^6.12.0",
     "basic-auth": "^1.1.0",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
+    "chokidar": "^3.4.0",
     "common-password": "^0.1.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
     "cron": "^1.2.1",
     "cron-parser": "^2.3.0",
-    "dat-node": "^3.5.5",
     "express": "^4.14.0",
     "front-matter": "^2.1.1",
-    "helmet": "^3.4.0",
+    "greenlock": "^4.0.4",
+    "greenlock-express": "^4.0.3",
+    "helmet": "^3.21.3",
     "http-errors": "^1.5.1",
     "ip": "^1.1.4",
-    "js-yaml": "^3.7.0",
-    "jsonwebtoken": "^7.2.1",
-    "letsencrypt-express": "^2.0.6",
+    "js-yaml": "^3.13.1",
+    "jsonwebtoken": "^8.5.1",
     "liquid-node": "^2.6.1",
+    "lodash.debounce": "^4.0.8",
     "marked": "^0.3.6",
-    "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
     "node-fetch": "^2.6.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^1.0.0",
     "passport-oauth2": "^1.5.0",
-    "pem": "^1.9.4",
+    "minimist": "^1.2.5",
+    "mkdirp": "^0.5.5",
+    "pem": "^1.14.4",
     "route-parser": "0.0.5",
+    "time-streams": "0.0.14",
     "winston": "^2.3.0"
   },
   "devDependencies": {
     "del": "^2.2.2",
     "faucet": "0.0.1",
+    "greenlock-manager-test": "^3.1.1",
     "node-mocks-http": "^1.5.5",
-    "pkg": "^4.3.0-beta.1",
     "standard": "^8.6.0",
-    "supertest": "^2.0.1",
+    "supertest": "^4.0.2",
     "tape": "^4.6.3"
-  },
-  "pkg": {
-    "assets": "node_modules/localhost.daplie.com-certificates/*.pem"
   }
 }
