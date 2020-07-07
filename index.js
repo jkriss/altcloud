@@ -16,6 +16,7 @@ const tokenAuth = require('./lib/token-auth')
 const accessRules = require('./lib/access-rules')
 const accessEnforcement = require('./lib/access-enforcement')
 const loginForm = require('./lib/login-form')
+const linkLogin = require('./lib/link-login')
 const sendRenderedFile = require('./lib/send-rendered-file')
 const editFiles = require('./lib/edit-files')
 const collections = require('./lib/collections')
@@ -47,6 +48,7 @@ const altcloud = function (options) {
   })
 
   app.use('/', loginForm(opts))
+  app.use('/', linkLogin(opts))
   app.use('/', signup(opts))
 
   app.use(helmet())
