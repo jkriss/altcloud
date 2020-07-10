@@ -1,6 +1,6 @@
 {
   "name": "altcloud",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A web server with extra powers. Run your own stuff.",
   "main": "index.js",
   "repository": {
@@ -44,7 +44,7 @@
     "mkdirp": "^0.5.5",
     "pem": "^1.14.4",
     "route-parser": "0.0.5",
-    "time-streams": "0.0.14",
+    "time-streams": "0.0.15",
     "winston": "^2.3.0"
   },
   "devDependencies": {
