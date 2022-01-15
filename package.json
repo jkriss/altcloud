@@ -39,7 +39,7 @@
     "jsonwebtoken": "^8.5.1",
     "liquid-node": "^2.6.1",
     "lodash.debounce": "^4.0.8",
-    "marked": "^0.3.6",
+    "marked": "^4.0.10",
     "minimist": "^1.2.5",
     "mkdirp": "^0.5.5",
     "pem": "^1.14.4",
